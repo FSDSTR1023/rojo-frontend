@@ -1,17 +1,26 @@
+import styles from '../styles/Login.module.css'
+
 export default function Login() {
   return (
-    <div>
-      <h2>Login</h2>
+    <div className={styles.page}>
+      <h2 className={styles.title}>Login</h2>
 
-      <form action="">
-        <label htmlFor="email">e-mail</label>
-        <input type="text" name="email" />
+      <form className={styles.form}>
+        <div className={styles.field}>
+          <label className={styles.label} htmlFor="email">
+            E-mail:
+          </label>
+          <input className={styles.input} type="text" name="email" />
+        </div>
 
-        <label htmlFor="email">e-mail</label>
-        <input type="text" name="email" />
+        <div className={styles.field}>
+          <label className={styles.label} htmlFor="password">
+            Password:
+          </label>
+          <input className={styles.input} type="password" name="password" />
+        </div>
 
-        <label htmlFor="email">e-mail</label>
-        <input type="text" name="email" />
+        <button className={styles.button}>Send</button>
       </form>
     </div>
   )

@@ -1,5 +1,5 @@
 .navbar {
-  background-color: rgb(163, 220, 173);
+  background-color: var(--clr-primary);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,11 +8,11 @@
   width: 100%;
   padding: 1rem 3rem;
   box-sizing: border-box;
-  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
 }
 
 .navTitle {
-  font-size: 3rem;
+  font-size: 2.5em;
 }
 
 .navLinks {
@@ -21,7 +21,7 @@
 }
 
 .main {
-  background-color: ghostwhite;
+  background-color: var(--clr-light);
   padding: 3rem;
   height: 100vh;
 }
