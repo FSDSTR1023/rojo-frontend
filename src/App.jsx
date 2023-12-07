@@ -8,11 +8,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout/>}>
-          <Route index element={<Login/>} />
-          <Route path='/login' element={<Login/>} />
-          <Route path='/explore' element={<Explore/>} />
-          <Route path='/profile' element={<Profile/>} />
+        <Route element={<Layout />}>
+          <Route index element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </BrowserRouter>

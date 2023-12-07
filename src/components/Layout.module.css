@@ -1,27 +1,27 @@
 .navbar {
-    background-color: rgb(163, 220, 173);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    padding: 1rem 3rem;
-    box-sizing: border-box;
-    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
+  background-color: rgb(163, 220, 173);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 1rem 3rem;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .navTitle {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 
 .navLinks {
-    display: flex;
-    gap: 2rem;
+  display: flex;
+  gap: 2rem;
 }
 
 .main {
-    background-color: ghostwhite;
-    padding: 3rem;
-    height: 100vh;
+  background-color: ghostwhite;
+  padding: 3rem;
+  height: 100vh;
 }
