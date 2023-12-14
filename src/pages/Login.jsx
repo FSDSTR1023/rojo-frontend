@@ -27,7 +27,7 @@ export default function Login({ isAuthenticated, setIsAuthenticated, setUser }) 
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/recipe')
+      navigate('/explore')
     }
   }, [isAuthenticated])
 
