@@ -135,6 +135,7 @@ table {
   --clr-primary: rgb(163, 220, 173);
   --clr-secondary: orange;
   --clr-shadow: rgba(0, 0, 0, 0.2);
+  --clr-error: rgb(255, 104, 104);
 
   --shadow: 0 0 10px 2px var(--clr-shadow);
 }
