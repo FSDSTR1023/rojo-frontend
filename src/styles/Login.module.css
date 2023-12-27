@@ -51,9 +51,3 @@
 .button:hover {
   box-shadow: var(--shadow);
 }
-
-.error {
-  color: var(--clr-error);
-  font-size: 0.8em;
-  font-weight: 700;
-}
