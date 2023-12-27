@@ -13,7 +13,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout user={user} isAuthenticated={isAuthenticated} />}>
+        <Route element={<Layout user={user} setUser={setUser} isAuthenticated={isAuthenticated} />}>
           <Route path="*" element={<Navigate to="/" />} />
           {isAuthenticated ? (
             <Route path="/" element={<Navigate to="/explore" />} />
@@ -23,6 +23,7 @@ function App() {
           <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
     </BrowserRouter>

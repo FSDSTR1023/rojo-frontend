@@ -4,12 +4,13 @@ import { Link, useNavigate } from 'react-router-dom'
 
 export default function Layout({ isAuthenticated, setUser, setIsAuthenticated }) {
   const navigate = useNavigate()
+
   const logOut = () => {
     setIsAuthenticated(false)
     setUser(null)
     navigate('/login')
   }
-  console.log('Layout isAuth', isAuthenticated)
+
   return (
     <>
       <nav className={styles.navbar}>
@@ -18,7 +19,7 @@ export default function Layout({ isAuthenticated, setUser, setIsAuthenticated })
         </Link>
 
         <ul className={styles.navLinks}>
-          {isAuthenticated && isAuthenticated ? (
+          {isAuthenticated ? (
             <>
               <li>
                 <Link to="/explore">Explore</Link>
