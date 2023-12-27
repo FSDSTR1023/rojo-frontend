@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from './pages/Login'
 import Explore from './pages/Explore'
 import Profile from './pages/Profile'
@@ -7,7 +7,7 @@ import Register from './pages/Register'
 import { useState } from 'react'
 
 function App() {
-  const [user, setUser] = useState('test')
+  const [user, setUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   return (
