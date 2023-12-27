@@ -3,6 +3,7 @@ import Login from './pages/Login'
 import Explore from './pages/Explore'
 import Profile from './pages/Profile'
 import Layout from './components/Layout'
+import Register from './pages/Register'
 import { useState } from 'react'
 
 function App() {
