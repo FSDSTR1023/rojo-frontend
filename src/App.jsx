@@ -13,22 +13,17 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout user={user} isAuthenticated={isAuthenticated} />}>
-          <Route index element={<Login />} />
-          <Route
-            path="/login"
-            element={
-              <Login isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <Register isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
-            }
-          />
+        <Route element={<Layout user={user} setUser={setUser} isAuthenticated={isAuthenticated} />}>
+          <Route path="*" element={<Navigate to="/" />} />
+          {isAuthenticated ? (
+            <Route path="/" element={<Navigate to="/explore" />} />
+          ) : (
+            <Route path="/" element={<Navigate to="/login" />} />
+          )}
+          <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
     </BrowserRouter>
