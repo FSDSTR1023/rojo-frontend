@@ -1,0 +1,41 @@
+.recipeWrapper {
+  width: 350px;
+  margin: 20px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+  cursor: default;
+  transition: all 400ms ease;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.recipeWrapper:hover {
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3%);
+}
+.title {
+  font-size: large;
+  font-weight: bold;
+}
+.stepTitle {
+  font-weight: 700;
+}
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.difficulty {
+  background-color: rgb(17, 156, 17);
+  border-radius: 6px;
+  padding: 5px;
+}
+.preparationTime {
+  background-color: red;
+  border-radius: 6px;
+  padding: 5px;
+}
+.publicationDate {
+}

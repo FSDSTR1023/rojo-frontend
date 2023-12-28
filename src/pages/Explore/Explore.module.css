@@ -1,0 +1,4 @@
+.categoriesWrapper {
+  display: flex;
+  flex-direction: row;
+}
