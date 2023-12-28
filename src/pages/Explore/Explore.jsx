@@ -10,7 +10,6 @@ export default function Explore() {
   useEffect(() => {
     getAllRecipes()
       .then((response) => {
-        console.log(response.data)
         setRecipes(response.data)
       })
       .catch((error) => console.log('No se pudieron cargard las recetas: ' + error))
