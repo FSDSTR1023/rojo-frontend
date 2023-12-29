@@ -1,3 +1,101 @@
-.test {
-  color: darkorchid;
+.imageWrapper {
+  position: relative;
+  height: 75vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Esta propiedad mantiene la imagen fija */
+}
+
+.imageCover {
+  position: absolute;
+  text-align: right;
+  top: 0;
+  right: 0;
+  width: 150px;
+  margin: 1rem 0;
+  background-image: linear-gradient(90deg, transparent, var(--clr-primary));
+}
+
+.imageCover > * {
+  padding: 0.5rem;
+}
+
+.categories {
+  display: flex;
+  gap: 1rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0.5rem;
+}
+
+.categories > * {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: var(--clr-primary);
+}
+
+.title {
+  font-size: 4em;
+  font-weight: 700;
+  padding: 2rem;
+}
+
+.contentWrapper {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  grid-template-areas: 'steps ingredients';
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.sectionTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+.ingredients {
+  grid-area: ingredients;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.ingredients > * {
+  background-color: var(--clr-primary);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.steps {
+  grid-area: steps;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.steps > * {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.steps > *:nth-child(odd) {
+  background-image: linear-gradient(270deg, transparent, var(--clr-primary));
+}
+
+.steps > *:nth-child(even) {
+  background-image: linear-gradient(90deg, transparent, var(--clr-primary));
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.stepContent h4 {
+  font-size: 1.25em;
+  font-weight: 700;
+  padding: 0.5rem 0;
 }
