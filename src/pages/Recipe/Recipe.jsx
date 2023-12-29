@@ -2,18 +2,20 @@ import useRecipe from '../../hooks/useRecipe'
 import styles from './Recipe.module.css'
 import { useParams } from 'react-router-dom'
 import { difficultyColor, preparationTimeColor, categoryColor } from '../../../public/colors/recipe.colors'
+import { FETCH_STATUS } from '../../constants/fetchStatus'
 
 export default function Recipe() {
   const { id } = useParams()
 
-  const { recipe, loading } = useRecipe(id)
+  const { recipe, status, error } = useRecipe(id)
   const { title, imageUrl, ingredients, difficulty, preparationTime, categories, preparation } = recipe
 
-  console.log(recipe)
-  console.log(loading)
-
-  if (loading || !preparation) {
+  if (status === FETCH_STATUS.LOADING) {
     return <div>Loading...</div>
+  }
+
+  if (status === FETCH_STATUS.ERROR) {
+    return <div>Error: {error}</div>
   }
 
   return (

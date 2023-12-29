@@ -1,23 +1,24 @@
 import { useEffect, useState } from 'react'
 import { getRecipeById } from '../api/recipe'
+import { FETCH_STATUS } from '../constants/fetchStatus'
 
 export default function useRecipe(id) {
   const [recipe, setRecipe] = useState({})
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
+  const [status, setStatus] = useState(FETCH_STATUS.LOADING)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    setLoading(true)
     getRecipeById(id)
       .then((response) => {
         setRecipe(response.data)
+        setStatus(FETCH_STATUS.SUCCESS)
       })
       .catch((err) => {
-        setError(true)
-        console.log(err)
+        setStatus(FETCH_STATUS.ERROR)
+        setError(err)
+        console.error(err)
       })
-      .finally(setLoading(false))
   }, [])
 
-  return { recipe, loading, error }
+  return { recipe, status, error }
 }
