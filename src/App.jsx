@@ -4,6 +4,7 @@ import Explore from './pages/Explore'
 import Profile from './pages/Profile'
 import Layout from './components/Layout'
 import Register from './pages/Register'
+import Recipe from './pages/Recipe'
 import { useState } from 'react'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           )}
           <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />} />
           <Route path="/explore" element={<Explore />} />
+          <Route path="/recipe/:id" element={<Recipe />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/register" element={<Register />} />
         </Route>
