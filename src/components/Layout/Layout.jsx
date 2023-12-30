@@ -25,6 +25,9 @@ export default function Layout({ isAuthenticated, setUser, setIsAuthenticated })
                 <Link to="/explore">Explore</Link>
               </li>
               <li>
+                <Link to="/users">Users</Link>
+              </li>
+              <li>
                 <Link to="/profile">Profile</Link>
               </li>
               <li>
