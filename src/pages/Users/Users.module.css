@@ -1,0 +1,36 @@
+.profileWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.profileCard {
+  background-color: var(--clr-primary);
+  padding: 1rem;
+  border-radius: 1rem;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-rows: 1fr 180px 1fr 4fr;
+  height: 300px;
+  width: 200px;
+  cursor: pointer;
+}
+
+.userName {
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.imageWrapper {
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+}
+
+.description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Maximum number of lines */
+  line-clamp: 3;
+  -webkit-box-orient: vertical; /*Adds dots at ther end */
+}
