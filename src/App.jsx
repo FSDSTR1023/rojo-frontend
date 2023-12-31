@@ -6,6 +6,8 @@ import Profile from './pages/Profile'
 import Layout from './components/Layout'
 import Register from './pages/Register'
 import Users from './pages/Users/Users'
+import Recipe from './pages/Recipe'
+import { useState } from 'react'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -34,6 +36,7 @@ function App() {
           <Route path="/explore" element={<Explore />} />
           <Route path="/users" element={<Users />} />
           <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/recipe/:id" element={<Recipe />} />
           <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
