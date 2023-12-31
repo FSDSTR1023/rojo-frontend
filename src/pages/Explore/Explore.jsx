@@ -17,7 +17,6 @@ export default function Explore() {
 
   return (
     <div>
-      <h2>Explore</h2>
       {recipes ? (
         <div className={styles.recipeRow}>
           {recipes.map((recipe) => (
