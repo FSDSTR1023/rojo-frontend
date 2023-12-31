@@ -11,10 +11,21 @@ function App() {
   const [user, setUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
+  console.log(user)
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout user={user} setUser={setUser} isAuthenticated={isAuthenticated} />}>
+        <Route
+          element={
+            <Layout
+              user={user}
+              setUser={setUser}
+              isAuthenticated={isAuthenticated}
+              setIsAuthenticated={setIsAuthenticated}
+            />
+          }
+        >
           <Route path="*" element={<Navigate to="/" />} />
           {isAuthenticated ? (
             <Route path="/" element={<Navigate to="/explore" />} />
@@ -24,7 +35,7 @@ function App() {
           <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/users" element={<Users />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile />} />
           <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
