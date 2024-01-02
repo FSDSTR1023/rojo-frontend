@@ -1,0 +1,44 @@
+.profile {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 2rem;
+}
+
+.sideBar,
+.mainContent {
+  background-color: var(--clr-primary);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.sideBar {
+  align-items: center;
+  padding: 1rem;
+  gap: 0.5rem;
+}
+
+.mainContent {
+  padding: 3rem;
+  gap: 1rem;
+}
+
+.imageWrapper {
+  width: 180px;
+  aspect-ratio: 1;
+  border-radius: 100%;
+  background-size: cover;
+  background-position: center;
+  margin: 1rem;
+}
+
+.name {
+  font-size: 2.5em;
+  font-weight: 700;
+}
+
+.sectionTitle {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}

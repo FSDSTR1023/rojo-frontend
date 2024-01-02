@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 import styles from './Layout.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 
-export default function Layout({ isAuthenticated, setUser, setIsAuthenticated }) {
+export default function Layout({ user, setUser, isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate()
 
   const logOut = () => {
@@ -25,7 +25,10 @@ export default function Layout({ isAuthenticated, setUser, setIsAuthenticated })
                 <Link to="/explore">Explore</Link>
               </li>
               <li>
-                <Link to="/profile">Profile</Link>
+                <Link to="/users">Users</Link>
+              </li>
+              <li>
+                <Link to={`/profile/${user._id}`}>Profile</Link>
               </li>
               <li>
                 <Link to="/login" onClick={logOut}>
