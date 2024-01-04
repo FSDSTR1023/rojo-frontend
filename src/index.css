@@ -139,3 +139,6 @@ table {
 
   --shadow: 0 0 10px 2px var(--clr-shadow);
 }
+html {
+  font-family: 'Signika Negative', sans-serif;
+}
