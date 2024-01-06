@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { useState } from 'react'
 import Login from './pages/Login'
-import Explore from './pages/Explore'
+import Explore from './pages/Explore/Explore'
 import Profile from './pages/Profile'
 import Layout from './components/Layout'
 import Register from './pages/Register'
@@ -11,6 +11,8 @@ import Recipe from './pages/Recipe'
 function App() {
   const [user, setUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [recipes, setRecipes] = useState(null)
+  const [userProfile, setUserProfile] = useState(null)
 
   return (
     <BrowserRouter>

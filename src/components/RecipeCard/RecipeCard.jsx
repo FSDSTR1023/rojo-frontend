@@ -1,34 +1,51 @@
+import { deleteRecipe } from '../../api/recipe'
 import styles from './RecipeCard.module.css'
-import { Link } from 'react-router-dom'
-import { difficultyColor, preparationTimeColor, categoryColor } from '../../colors/recipe.colors'
+import { useState } from 'react'
 
-export default function RecipeCard({
-  _id: id,
-  title,
-  imageUrl = 'https://www.foodandwine.com/thmb/YlgBj_G9a_psYSzA3gfU6gx9A3w=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/bucatini-with-mushroom-ragu-dandelion-greens-and-tarragon-FT-RECIPE0421-3a5f0d29f7264f5e9952d4a3a51f5f58.jpg',
-  difficulty,
-  preparationTime,
-  categories,
-}) {
+const RecipeCard = ({ recipe, load, setLoad }) => {
+  const [visiblePreparation, setVisiblePreparation] = useState(false)
+
+  const handleClick = async (id) => {
+    await deleteRecipe(id)
+    setLoad(!load)
+  }
+
+  const formattedIngredients = recipe.ingredients.slice(0, -1).join(', ') + ', ' + recipe.ingredients.slice(-1)[0] + '.'
+
+  console.log(recipe)
+
   return (
-    <Link to={`/recipe/${id}`}>
-      <div className={styles.card}>
-        <div className={styles.imageWrapper}>
-          <img className={styles.image} src={imageUrl} alt="recipe-image" />
-        </div>
-        <h3 className={styles.title}>{title}</h3>
-        <div className={styles.complexity}>
-          <span style={{ backgroundColor: difficultyColor[difficulty] }}>{difficulty}</span>
-          <span style={{ backgroundColor: preparationTimeColor[preparationTime] }}>{preparationTime}</span>
-        </div>
-        <div className={styles.categories}>
-          {categories.map((category) => (
-            <span key={category} className={styles.category} style={{ backgroundColor: categoryColor[category] }}>
-              {category}
-            </span>
+    <div className={styles.recipeWrapper}>
+      <div>
+        <h3 className={styles.title}>{recipe.title}</h3>
+        <p>Ingredients: {formattedIngredients}</p>
+      </div>
+      {visiblePreparation && (
+        <div className={styles.steps}>
+          {recipe.preparation.map((step, index) => (
+            <div key={index}>
+              <h2 className={styles.stepTitle}>{step.title}</h2>
+              <p className={styles.stepDescription}>{step.description}</p>
+            </div>
           ))}
         </div>
+      )}
+      <div className={styles.footer}>
+        <div className={styles.publicationDate}>
+          <p>Publication date: {new Date(recipe.createdAt).toLocaleDateString()}</p>
+        </div>
+        <div className={styles.difficulty}>
+          <p>{recipe.difficulty}</p>
+        </div>
+        <div className={styles.preparationTime}>
+          <p>{recipe.preparationTime}</p>
+        </div>
       </div>
-    </Link>
+      <button onClick={() => setVisiblePreparation(!visiblePreparation)}>
+        {visiblePreparation ? 'Ocultar Preparación' : 'Ver Preparación'}
+      </button>
+    </div>
   )
 }
+
+export default RecipeCard
