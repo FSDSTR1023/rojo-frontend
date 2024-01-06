@@ -1,0 +1,35 @@
+.userProfileCard {
+  width: 350px;
+  margin: 20px;
+  border-radius: 4px;
+  padding-bottom: 20px;
+  background: white;
+  text-align: center;
+}
+
+.gradiant {
+  background-image: linear-gradient(#93fce4, #11d3a6);
+  height: 125px;
+  border-radius: 4px 4px 0px 0px;
+}
+.profileDown img {
+  height: 150px;
+  border-radius: 100px;
+  margin-top: -75px;
+  padding: 5px;
+  background: white;
+}
+
+.profileTitle {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.profileDescription {
+  padding: 20px 40px;
+  font-size: 16px;
+}
+
+.email {
+  padding: 10px;
+}

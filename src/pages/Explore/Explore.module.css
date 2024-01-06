@@ -1,4 +1,12 @@
 .categoriesWrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+}
+.categoriesTitle {
+  font-size: 24px;
+  font-weight: 600;
+}
+.categoriesCards {
+  display: flex;
+  height: 300px;
 }

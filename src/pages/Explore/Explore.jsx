@@ -1,11 +1,12 @@
 import RecipeCard from '../../components/RecipeCard/RecipeCard'
 import styles from './Explore.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { getAllRecipes } from '../../api/recipe'
 
 export default function Explore() {
   const [recipes, setRecipes] = useState([])
   const [load, setLoad] = useState(false)
+  const categoriesRef = useRef(null)
 
   useEffect(() => {
     async function fetchRecipes() {
@@ -43,10 +44,12 @@ export default function Explore() {
     <div>
       {Object.entries(groupedRecipes).map(([category, categoryRecipes]) => (
         <div className={styles.categoriesWrapper} key={category}>
-          <h2>{category}</h2>
-          {categoryRecipes.map((recipe) => (
-            <RecipeCard recipe={recipe} key={recipe._id} load={load} setLoad={setLoad} />
-          ))}
+          <h2 className={styles.categoriesTitle}>{category}</h2>
+          <div className={styles.categoriesCards} ref={categoriesRef}>
+            {categoryRecipes.map((recipe) => (
+              <RecipeCard recipe={recipe} key={recipe._id} load={load} setLoad={setLoad} />
+            ))}
+          </div>
         </div>
       ))}
     </div>

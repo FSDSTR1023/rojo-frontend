@@ -10,6 +10,7 @@ function App() {
   const [user, setUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [recipes, setRecipes] = useState(null)
+  const [userProfile, setUserProfile] = useState(null)
 
   return (
     <BrowserRouter>
@@ -34,7 +35,17 @@ function App() {
               <Explore user={user} isAuthenticated={isAuthenticated} recipes={recipes} setRecipes={setRecipes} />
             }
           />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                isAuthenticated={isAuthenticated}
+                user={user}
+                userProfile={userProfile}
+                setUserProfile={setUserProfile}
+              />
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
