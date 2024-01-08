@@ -1,5 +1,5 @@
 .recipeWrapper {
-  width: 350px;
+  width: 400px;
   height: auto;
   margin: 20px;
   border-radius: 6px;
@@ -7,7 +7,6 @@
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
   cursor: default;
   transition: all 400ms ease;
-  padding: 2rem;
   display: flex;
   flex-direction: column;
 }
@@ -15,14 +14,28 @@
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
   transform: translateY(-3%);
 }
+.recipeContent {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
 .title {
   font-size: large;
   font-weight: bold;
+}
+.ingredients {
+  padding-top: 10px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Maximum number of lines */
+  line-clamp: 3;
+  -webkit-box-orient: vertical; /*Adds dots at ther end */
 }
 .stepTitle {
   font-weight: 700;
 }
 .footer {
+  padding-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -37,4 +50,18 @@
   background-color: red;
   border-radius: 6px;
   padding: 5px;
+}
+.buttonPreparation {
+  padding: 1rem 3rem;
+  border: 0;
+  border-radius: 0.5rem;
+  margin: 1rem 0 0;
+  background-color: var(--clr-secondary);
+}
+.button:hover {
+  box-shadow: var(--shadow);
+}
+
+.image {
+  height: 150px;
 }
