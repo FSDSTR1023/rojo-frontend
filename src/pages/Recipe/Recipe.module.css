@@ -45,9 +45,9 @@
 .contentWrapper {
   display: grid;
   grid-template-columns: 1fr 360px;
-  grid-template-areas: 'steps ingredients';
   padding: 2rem;
   gap: 2rem;
+  row-gap: 5rem;
 }
 
 .sectionTitle {
@@ -56,7 +56,6 @@
 }
 
 .ingredients {
-  grid-area: ingredients;
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: wrap;
@@ -71,7 +70,6 @@
 }
 
 .steps {
-  grid-area: steps;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -98,4 +96,10 @@
   font-size: 1.25em;
   font-weight: 700;
   padding: 0.5rem 0;
+}
+
+.opinionsBento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
 }
