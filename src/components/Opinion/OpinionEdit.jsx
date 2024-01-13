@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './Opinion.module.css'
 import Star from '../Star'
 import { addOpinion } from '../../api/recipe'
+import RecipeContext from '../../context/RecipeContext'
 
-export default function OpinionEdit({ setIsEdit, recipeId }) {
+export default function OpinionEdit({ setIsEdit }) {
   const [rating, setRating] = useState(3)
   const [text, setText] = useState('')
+
+  const { id: recipeId, setOpinion } = useContext(RecipeContext)
 
   const handleStarClick = (n) => {
     setRating(n + 1)
@@ -22,7 +25,7 @@ export default function OpinionEdit({ setIsEdit, recipeId }) {
   const handleSend = () => {
     addOpinion(recipeId, { rating, text })
       .then((response) => {
-        // setOpinion(response.data.updatedOpinion)
+        setOpinion(response.data.updatedOpinion)
         setIsEdit(false)
       })
       .catch((err) => console.log(err))

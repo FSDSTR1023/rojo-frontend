@@ -1,7 +1,7 @@
 import styles from './Opinion.module.css'
 import Star from '../Star'
 
-export default function Opinion({ text, rating, recipeId }) {
+export default function Opinion({ text, rating }) {
   return (
     <div className={styles.opinionWrapper}>
       <div className={styles.starsWrapper}>

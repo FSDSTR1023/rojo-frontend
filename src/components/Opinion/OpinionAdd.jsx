@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styles from './Opinion.module.css'
 import OpinionEdit from './OpinionEdit'
 
-export default function OpinionAdd({ recipeId }) {
+export default function OpinionAdd() {
   const [isEdit, setIsEdit] = useState(false)
 
   const handleClick = () => {
@@ -16,7 +16,7 @@ export default function OpinionAdd({ recipeId }) {
           +
         </button>
       ) : (
-        <OpinionEdit setIsEdit={setIsEdit} recipeId={recipeId} />
+        <OpinionEdit setIsEdit={setIsEdit} />
       )}
     </div>
   )
