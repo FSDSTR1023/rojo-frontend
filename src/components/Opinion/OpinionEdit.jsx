@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './Opinion.module.css'
 import Star from '../Star'
+import { addOpinion } from '../../api/recipe'
 
 export default function OpinionEdit({ setIsEdit, recipeId }) {
   const [rating, setRating] = useState(3)
@@ -19,9 +20,9 @@ export default function OpinionEdit({ setIsEdit, recipeId }) {
   }
 
   const handleSend = () => {
-    addOpinion(recipeId, { rating: stars, text })
+    addOpinion(recipeId, { rating, text })
       .then((response) => {
-        setOpinion(response.data.updatedOpinion)
+        // setOpinion(response.data.updatedOpinion)
         setIsEdit(false)
       })
       .catch((err) => console.log(err))
