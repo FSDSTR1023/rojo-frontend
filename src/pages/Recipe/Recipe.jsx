@@ -2,7 +2,10 @@ import useRecipe from '../../hooks/useRecipe'
 import styles from './Recipe.module.css'
 import { useParams } from 'react-router-dom'
 import { FETCH_STATUS } from '../../constants/fetchStatus'
-import Opinion from '../../components/Opinion'
+import RecipeHeader from '../../components/RecipeHeader'
+import RecipeStepsList from '../../components/RecipeStepsList'
+import RecipeIngredientsList from '../../components/RecipeIngredientsList'
+import RecipeOpinionsList from '../../components/RecipeOpinionsList'
 
 export default function Recipe() {
   const { id } = useParams()
@@ -20,50 +23,21 @@ export default function Recipe() {
 
   return (
     <div>
-      <div className={styles.imageWrapper} style={{ backgroundImage: `url(${imageUrl})` }}>
-        {/* <img className={styles.image} src={imageUrl} alt="recipe-image" /> */}
-        <div className={styles.imageCover}>
-          <p>{difficulty}</p>
-          <p>{preparationTime}</p>
-        </div>
-
-        <div className={styles.categories}>
-          {categories.map((category) => (
-            <span key={category}>{category}</span>
-          ))}
-        </div>
-      </div>
+      <RecipeHeader
+        imageUrl={imageUrl}
+        difficulty={difficulty}
+        preparationTime={preparationTime}
+        categories={categories}
+      />
 
       <h2 className={styles.title}>{title}</h2>
 
       <div className={styles.contentWrapper}>
-        <div className={styles.steps}>
-          {preparation.map(({ title, description }, i) => (
-            <div key={i}>
-              <h3 className={styles.sectionTitle}>{i + 1}</h3>
-              <div className={styles.stepContent}>
-                <h4>{title}</h4>
-                <p>{description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <RecipeStepsList preparation={preparation} />
 
-        <div>
-          <h3 className={styles.sectionTitle}>Ingredients</h3>
-          <ul className={styles.ingredients}>
-            {ingredients.map((ingredient) => (
-              <li key={ingredient}>{ingredient}</li>
-            ))}
-          </ul>
-        </div>
+        <RecipeIngredientsList ingredients={ingredients} />
 
-        <div className={styles.opinionsBento}>
-          {opinions.map((opinion) => (
-            <Opinion key={opinion._id} {...opinion} recipeId={id} />
-          ))}
-          <Opinion key="addOpinion" add={true} recipeId={id} />
-        </div>
+        <RecipeOpinionsList opinions={opinions} recipeId={id} />
       </div>
     </div>
   )

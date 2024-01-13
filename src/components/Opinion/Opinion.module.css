@@ -1,11 +1,8 @@
 .opinionWrapper {
-  background-color: var(--clr-primary);
-  border-radius: 1rem;
   display: grid;
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  padding: 2rem;
 }
 
 .addWrapper {
