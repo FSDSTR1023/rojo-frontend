@@ -39,8 +39,8 @@ export default function OpinionEdit({ setIsEdit }) {
           return <Star key={i} className={starClass} onClick={() => handleStarClick(i)} />
         })}
       </div>
-      <input type="textarea" onChange={handleTextChange} />
-      <div>
+      <input className={styles.text} type="textarea" onChange={handleTextChange} />
+      <div className={styles.buttonsWrapper}>
         <button onClick={handleSend}>Send</button>
         <button onClick={handleCancel}>Cancel</button>
       </div>

@@ -43,7 +43,6 @@
 
 .userWrapper {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 1rem;
 }
@@ -58,4 +57,19 @@
   width: 3rem;
   object-fit: cover;
   border-radius: 100vh;
+}
+
+.text {
+  border-radius: 0.5rem;
+  height: 3rem;
+  border: none;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttonsWrapper button {
+  padding: 0.5rem 1rem;
 }
