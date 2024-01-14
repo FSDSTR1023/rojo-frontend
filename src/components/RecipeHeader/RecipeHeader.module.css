@@ -2,9 +2,12 @@
   position: relative;
   height: 75vh;
   overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed; /* Esta propiedad mantiene la imagen fija */
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .imageCover {

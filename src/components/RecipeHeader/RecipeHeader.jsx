@@ -6,8 +6,8 @@ export default function RecipeHeader() {
   const { difficulty, preparationTime, categories, imageUrl } = useContext(RecipeContext)
 
   return (
-    <div className={styles.imageWrapper} style={{ backgroundImage: `url(${imageUrl})` }}>
-      {/* <img className={styles.image} src={imageUrl} alt="recipe-image" /> */}
+    <div className={styles.imageWrapper}>
+      <img className={styles.image} src={imageUrl} alt="recipe-image" />
       <div className={styles.imageCover}>
         <p>{difficulty}</p>
         <p>{preparationTime}</p>
