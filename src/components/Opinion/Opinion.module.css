@@ -40,3 +40,22 @@
 .addButton:focus {
   background-color: rgba(0, 0, 0, 0.3);
 }
+
+.userWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userWrapper strong {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+.image {
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
+  border-radius: 100vh;
+}
