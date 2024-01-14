@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { useState } from 'react'
+import { RecipeProvider } from './context/RecipeContext'
 import Login from './pages/Login'
 import Explore from './pages/Explore/Explore'
 import Profile from './pages/Profile/Profile'
@@ -37,7 +38,14 @@ function App() {
           <Route path="/explore" element={<Explore />} />
           <Route path="/users" element={<Users />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/recipe/:id" element={<Recipe />} />
+          <Route
+            path="/recipe/:id"
+            element={
+              <RecipeProvider>
+                <Recipe />
+              </RecipeProvider>
+            }
+          />
           <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
