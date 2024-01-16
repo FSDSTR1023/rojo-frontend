@@ -1,15 +1,17 @@
 import { Outlet } from 'react-router-dom'
 import styles from './Layout.module.css'
 import { Link, useNavigate } from 'react-router-dom'
+import { useProfile } from '../../context/ProfileContext'
+import { useEffect } from 'react'
 
-export default function Layout({ user, setUser, isAuthenticated, setIsAuthenticated }) {
+export default function Layout() {
   const navigate = useNavigate()
+  const { profile, login, logout, isAuthenticated } = useProfile()
 
-  const logOut = () => {
-    setIsAuthenticated(false)
-    setUser(null)
-    navigate('/login')
-  }
+  useEffect(() => {
+    if (isAuthenticated) navigate('/explore')
+    else navigate('/login')
+  }, [isAuthenticated])
 
   return (
     <>
@@ -28,10 +30,10 @@ export default function Layout({ user, setUser, isAuthenticated, setIsAuthentica
                 <Link to="/users">Users</Link>
               </li>
               <li>
-                <Link to={`/profile/${user._id}`}>Profile</Link>
+                <Link to={`/profile/${profile?._id}`}>Profile</Link>
               </li>
               <li>
-                <Link to="/login" onClick={logOut}>
+                <Link to="/login" onClick={logout}>
                   Log Out
                 </Link>
               </li>
