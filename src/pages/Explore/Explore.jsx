@@ -13,7 +13,6 @@ export default function Explore() {
       try {
         const response = await getAllRecipes()
         const data = response.data
-        console.log('Recetas obtenidas:', data)
         setRecipes(data)
       } catch (error) {
         console.error('Error al obtener recetas:', error)

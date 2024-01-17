@@ -14,12 +14,10 @@ const Register = ({ setUser, isAuthenticated, setIsAuthenticated }) => {
   const navigate = useNavigate()
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data)
     try {
       const response = await registerRequest(data)
       setUser(response.data)
       setIsAuthenticated(true)
-      console.log(response)
     } catch (error) {
       setError('register', {
         type: 'register',

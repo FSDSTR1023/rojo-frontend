@@ -10,8 +10,6 @@ const RecipeCard = ({ recipe, load, setLoad }) => {
 
   const formattedIngredients = recipe.ingredients.slice(0, -1).join(', ') + ', ' + recipe.ingredients.slice(-1)[0] + '.'
 
-  console.log(recipe)
-
   return (
     <div className={styles.recipeWrapper}>
       <img className={styles.image} src={recipe.imageUrl} alt="recipe-image" />
