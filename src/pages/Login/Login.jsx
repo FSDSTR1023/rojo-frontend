@@ -1,6 +1,5 @@
 import styles from './Login.module.css'
 import { useForm } from 'react-hook-form'
-import { checkAuthToken } from '../../api/user'
 import { useNavigate } from 'react-router-dom'
 import { useProfile } from '../../context/ProfileContext'
 import { useEffect } from 'react'
@@ -13,12 +12,15 @@ export default function Login() {
     setError,
   } = useForm()
   const navigate = useNavigate()
-  const { profile, login, isAuthenticated, setProfile } = useProfile()
+  const { login, isAuthenticated } = useProfile()
 
   const onSubmit = handleSubmit((data) => {
-    if (profile) navigate('/explore')
     login(data)
   })
+
+  useEffect(() => {
+    if (isAuthenticated) navigate('/explore')
+  }, [isAuthenticated])
 
   return (
     <div className={styles.page}>

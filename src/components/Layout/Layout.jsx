@@ -1,17 +1,10 @@
 import { Outlet } from 'react-router-dom'
 import styles from './Layout.module.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useProfile } from '../../context/ProfileContext'
-import { useEffect } from 'react'
 
 export default function Layout() {
-  const navigate = useNavigate()
-  const { profile, login, logout, isAuthenticated } = useProfile()
-
-  useEffect(() => {
-    if (isAuthenticated) navigate('/explore')
-    else navigate('/login')
-  }, [isAuthenticated])
+  const { profile, logout, isAuthenticated } = useProfile()
 
   return (
     <>
