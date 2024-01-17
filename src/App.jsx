@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
-import { useState } from 'react'
 import { RecipeProvider } from './context/RecipeContext'
 import Login from './pages/Login'
 import Explore from './pages/Explore/Explore'
@@ -8,48 +7,38 @@ import Layout from './components/Layout'
 import Register from './pages/Register'
 import Users from './pages/Users/Users'
 import Recipe from './pages/Recipe'
+import { ProfileProvider } from './context/ProfileContext'
+import ProtectedRoutes from './components/ProtectedRoutes'
 
 function App() {
-  const [user, setUser] = useState(null)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [recipes, setRecipes] = useState(null)
-  const [userProfile, setUserProfile] = useState(null)
-
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          element={
-            <Layout
-              user={user}
-              setUser={setUser}
-              isAuthenticated={isAuthenticated}
-              setIsAuthenticated={setIsAuthenticated}
-            />
-          }
-        >
-          <Route path="*" element={<Navigate to="/" />} />
-          {isAuthenticated ? (
+    <ProfileProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="*" element={<Navigate to="/" />} />
             <Route path="/" element={<Navigate to="/explore" />} />
-          ) : (
-            <Route path="/" element={<Navigate to="/login" />} />
-          )}
-          <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/profile/:id" element={<Profile />} />
-          <Route
-            path="/recipe/:id"
-            element={
-              <RecipeProvider>
-                <Recipe />
-              </RecipeProvider>
-            }
-          />
-          <Route path="/register" element={<Register />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
+            <Route element={<ProtectedRoutes />}>
+              <Route path="/explore" element={<Explore />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/profile/:id" element={<Profile />} />
+              <Route
+                path="/recipe/:id"
+                element={
+                  <RecipeProvider>
+                    <Recipe />
+                  </RecipeProvider>
+                }
+              />
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ProfileProvider>
+
   )
 }
 

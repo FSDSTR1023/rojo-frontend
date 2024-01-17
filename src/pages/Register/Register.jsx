@@ -3,8 +3,9 @@ import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import { registerRequest } from '../../api/user'
 import styles from './Register.module.css'
+import { useProfile } from '../../context/ProfileContext'
 
-const Register = ({ setUser, isAuthenticated, setIsAuthenticated }) => {
+const Register = () => {
   const {
     register,
     handleSubmit,
@@ -12,19 +13,27 @@ const Register = ({ setUser, isAuthenticated, setIsAuthenticated }) => {
     getValues,
   } = useForm()
   const navigate = useNavigate()
+  const { isAuthenticated, login } = useProfile()
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data)
     try {
-      const response = await registerRequest(data)
-      setUser(response.data)
-      setIsAuthenticated(true)
-      console.log(response)
-    } catch (error) {
-      setError('register', {
-        type: 'register',
-        message: 'The user cannot register',
+      const { name, lastName, email, password, country, description, userName } = data
+      await registerRequest({
+        name,
+        lastName,
+        email,
+        password,
+        country,
+        description,
+        userName,
       })
+      login({ email, password })
+    } catch (error) {
+      // setError('register', {
+      //   type: 'register',
+      //   message: `The user cannot register: ${error}`,
+      // })
+      console.log(error)
     }
   })
 
@@ -40,7 +49,7 @@ const Register = ({ setUser, isAuthenticated, setIsAuthenticated }) => {
         <h2 className={styles.title}>Register your account</h2>
         <form className={styles.form} onSubmit={onSubmit}>
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="email">
+            <label className={styles.label} htmlFor="name">
               Name
             </label>
             <div>
@@ -56,7 +65,7 @@ const Register = ({ setUser, isAuthenticated, setIsAuthenticated }) => {
             {errors.name && <span className={styles.error}>This field is required</span>}
           </div>
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="email">
+            <label className={styles.label} htmlFor="lastName">
               Last Name
             </label>
             <div>
@@ -176,8 +185,9 @@ const Register = ({ setUser, isAuthenticated, setIsAuthenticated }) => {
             Sign Up
           </button>
           <div className={styles.field}>
-            <p>If you are registered go to </p>
-            <Link to="/login">Login</Link>
+            <p>
+              If you are registered go to <Link to="/login">Login</Link>
+            </p>
           </div>
         </form>
       </div>
