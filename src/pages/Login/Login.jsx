@@ -1,10 +1,11 @@
 import styles from './Login.module.css'
 import { useForm } from 'react-hook-form'
-import { loginUser } from '../../api/user'
 import { useNavigate } from 'react-router-dom'
 import { GoogleLogin } from '@react-oauth/google';
+import { useProfile } from '../../context/ProfileContext'
+import { useEffect } from 'react'
 
-export default function Login({ setIsAuthenticated, setUser }) {
+export default function Login() {
   const {
     register,
     handleSubmit,
@@ -12,20 +13,15 @@ export default function Login({ setIsAuthenticated, setUser }) {
     setError,
   } = useForm()
   const navigate = useNavigate()
+  const { login, isAuthenticated } = useProfile()
 
-  const onSubmit = handleSubmit(async (data) => {
-    try {
-      const response = await loginUser(data)
-      setUser(response.data)
-      setIsAuthenticated(true)
-      navigate('/explore')
-    } catch (error) {
-      setError('login', {
-        type: 'login',
-        message: 'The user or the password does not exist',
-      })
-    }
+  const onSubmit = handleSubmit((data) => {
+    login(data)
   })
+
+  useEffect(() => {
+    if (isAuthenticated) navigate('/explore')
+  }, [isAuthenticated])
 
   return (
     <div className={styles.page}>

@@ -1,47 +1,67 @@
-.card {
-  background-color: var(--clr-primary);
+.recipeWrapper {
+  width: 400px;
+  height: auto;
+  margin: 20px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+  cursor: default;
+  transition: all 400ms ease;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  width: fit-content;
-  padding: 1rem;
-  border-radius: 1rem;
-  width: 200px;
-  cursor: pointer;
 }
-
-.title {
-  font-weight: 700;
-  font-size: 1.5em;
+.recipeWrapper:hover {
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3%);
 }
-
-.imageWrapper {
+.recipeContent {
+  padding: 2rem;
   display: flex;
-  justify-content: center;
-  width: 200px;
-  height: 150px;
+  flex-direction: column;
+}
+.title {
+  font-size: large;
+  font-weight: bold;
+}
+.ingredients {
+  padding-top: 10px;
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Maximum number of lines */
+  line-clamp: 3;
+  -webkit-box-orient: vertical; /*Adds dots at ther end */
+}
+.stepTitle {
+  font-weight: 700;
+}
+.footer {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.difficulty {
+  background-color: rgb(17, 156, 17);
+  border-radius: 6px;
+  padding: 5px;
+}
+.preparationTime {
+  background-color: red;
+  border-radius: 6px;
+  padding: 5px;
+}
+.buttonPreparation {
+  padding: 1rem 3rem;
+  border: 0;
+  border-radius: 0.5rem;
+  margin: 1rem 0 0;
+  background-color: var(--clr-secondary);
+}
+.button:hover {
+  box-shadow: var(--shadow);
 }
 
 .image {
-  min-height: 150px;
-}
-
-.complexity {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.complexity > *,
-.category {
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
-}
-
-.categories {
-  display: flex;
-  gap: 0.25rem;
-  flex-wrap: wrap;
+  height: 150px;
 }

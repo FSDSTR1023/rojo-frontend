@@ -1,0 +1,75 @@
+.opinionWrapper {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.starsWrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.fullStar,
+.emptyStar {
+  height: 1em;
+  width: 1em;
+}
+
+.fullStar {
+  color: #ed8a19;
+}
+
+.emptyStar {
+  color: #8d8d8d;
+}
+
+.addButton {
+  font-size: 4em;
+  font-weight: bold;
+  border-radius: 100%;
+  border: none;
+  width: 5rem;
+  height: 5rem;
+  color: var(--clr-primary);
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: all linear 200ms;
+}
+.addButton:hover,
+.addButton:focus {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.userWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userWrapper strong {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+.image {
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
+  border-radius: 100vh;
+}
+
+.text {
+  border-radius: 0.5rem;
+  height: 3rem;
+  border: none;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttonsWrapper button {
+  padding: 0.5rem 1rem;
+}
