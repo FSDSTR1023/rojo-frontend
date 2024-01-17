@@ -2,6 +2,7 @@ import styles from './Login.module.css'
 import { useForm } from 'react-hook-form'
 import { loginUser } from '../../api/user'
 import { useNavigate } from 'react-router-dom'
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function Login({ setIsAuthenticated, setUser }) {
   const {
@@ -45,7 +46,7 @@ export default function Login({ setIsAuthenticated, setUser }) {
           />
         </div>
         {errors.email && <span className={styles.error}>{errors.email.message}</span>}
-
+         
         <div className={styles.field}>
           <label className={styles.label} htmlFor="password">
             Password:
@@ -58,6 +59,14 @@ export default function Login({ setIsAuthenticated, setUser }) {
             id="password"
           />
         </div>
+        <GoogleLogin
+           onSuccess={credentialResponse => {
+             console.log(credentialResponse);
+           }}
+             onError={() => {
+             console.log('Login Failed');
+           }}
+          />
         {errors.password && <span className={styles.error}>{errors.password.message}</span>}
 
         {errors.login && <span className={styles.error}>{errors.login.message}</span>}
@@ -65,5 +74,6 @@ export default function Login({ setIsAuthenticated, setUser }) {
         <button className={styles.button}>Send</button>
       </form>
     </div>
+    
   )
 }

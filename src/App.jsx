@@ -26,6 +26,7 @@ function App() {
             />
           }
         >
+        
           <Route path="*" element={<Navigate to="/" />} />
           {isAuthenticated ? (
             <Route path="/" element={<Navigate to="/explore" />} />
