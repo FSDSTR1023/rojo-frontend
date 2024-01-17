@@ -1,6 +1,6 @@
 import styles from './RecipeCard.module.css'
 import { Link } from 'react-router-dom'
-import { difficultyColor, preparationTimeColor, categoryColor } from '../../../public/colors/recipe.colors'
+import { difficultyColor, preparationTimeColor, categoryColor } from '../../constants/colors/recipe.colors'
 
 export default function RecipeCard({
   _id: id,
