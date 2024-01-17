@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { RecipeProvider } from './context/RecipeContext'
 import Login from './pages/Login'
-import Explore from './pages/Explore'
-import Profile from './pages/Profile'
+import Explore from './pages/Explore/Explore'
+import Profile from './pages/Profile/Profile'
 import Layout from './components/Layout'
 import Register from './pages/Register'
 import Users from './pages/Users/Users'
@@ -24,12 +25,20 @@ function App() {
               <Route path="/explore" element={<Explore />} />
               <Route path="/users" element={<Users />} />
               <Route path="/profile/:id" element={<Profile />} />
-              <Route path="/recipe/:id" element={<Recipe />} />
+              <Route
+                path="/recipe/:id"
+                element={
+                  <RecipeProvider>
+                    <Recipe />
+                  </RecipeProvider>
+                }
+              />
             </Route>
           </Route>
         </Routes>
       </BrowserRouter>
     </ProfileProvider>
+
   )
 }
 

@@ -1,32 +1,57 @@
-import { useState } from 'react'
-import RecipeCard from '../../components/RecipeCard'
+import RecipeCard from '../../components/RecipeCard/RecipeCard'
 import styles from './Explore.module.css'
-import { useEffect } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { getAllRecipes } from '../../api/recipe'
 
 export default function Explore() {
   const [recipes, setRecipes] = useState([])
+  const [load, setLoad] = useState(false)
+  const categoriesRef = useRef(null)
 
   useEffect(() => {
-    getAllRecipes()
-      .then((response) => {
-        setRecipes(response.data)
+    async function fetchRecipes() {
+      try {
+        const response = await getAllRecipes()
+        const data = response.data
+        console.log('Recetas obtenidas:', data)
+        setRecipes(data)
+      } catch (error) {
+        console.error('Error al obtener recetas:', error)
+      }
+    }
+    fetchRecipes()
+  }, [load])
+
+  const groupedRecipes = groupRecipesByCategory(recipes)
+
+  function groupRecipesByCategory(recipes) {
+    if (!recipes || recipes.length === 0) {
+      return {} // Retorna un objeto vacío si no hay recetas
+    }
+
+    return recipes.reduce((acc, recipe) => {
+      recipe.categories.forEach((category) => {
+        if (!acc[category]) {
+          acc[category] = []
+        }
+        acc[category].push(recipe)
       })
-      .catch((error) => console.log('No se pudieron cargard las recetas: ' + error))
-  }, [])
+      return acc
+    }, {})
+  }
 
   return (
     <div>
-      <h2>Explore</h2>
-      {recipes ? (
-        <div className={styles.recipeRow}>
-          {recipes.map((recipe) => (
-            <RecipeCard key={recipe._id} {...recipe} />
-          ))}
+      {Object.entries(groupedRecipes).map(([category, categoryRecipes]) => (
+        <div className={styles.categoriesWrapper} key={category}>
+          <h2 className={styles.categoriesTitle}>{category}</h2>
+          <div className={styles.categoriesCards} ref={categoriesRef}>
+            {categoryRecipes.map((recipe) => (
+              <RecipeCard recipe={recipe} key={recipe._id} load={load} setLoad={setLoad} />
+            ))}
+          </div>
         </div>
-      ) : (
-        <p>No recipes found</p>
-      )}
+      ))}
     </div>
   )
 }

@@ -1,34 +1,39 @@
+import { deleteRecipe } from '../../api/recipe'
 import styles from './RecipeCard.module.css'
 import { Link } from 'react-router-dom'
-import { difficultyColor, preparationTimeColor, categoryColor } from '../../constants/colors/recipe.colors'
 
-export default function RecipeCard({
-  _id: id,
-  title,
-  imageUrl = 'https://www.foodandwine.com/thmb/YlgBj_G9a_psYSzA3gfU6gx9A3w=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/bucatini-with-mushroom-ragu-dandelion-greens-and-tarragon-FT-RECIPE0421-3a5f0d29f7264f5e9952d4a3a51f5f58.jpg',
-  difficulty,
-  preparationTime,
-  categories,
-}) {
+const RecipeCard = ({ recipe, load, setLoad }) => {
+  const handleClick = async (id) => {
+    await deleteRecipe(id)
+    setLoad(!load)
+  }
+
+  const formattedIngredients = recipe.ingredients.slice(0, -1).join(', ') + ', ' + recipe.ingredients.slice(-1)[0] + '.'
+
+  console.log(recipe)
+
   return (
-    <Link to={`/recipe/${id}`}>
-      <div className={styles.card}>
-        <div className={styles.imageWrapper}>
-          <img className={styles.image} src={imageUrl} alt="recipe-image" />
+    <div className={styles.recipeWrapper}>
+      <img className={styles.image} src={recipe.imageUrl} alt="recipe-image" />
+      <div className={styles.recipeContent}>
+        <div>
+          <h3 className={styles.title}>{recipe.title}</h3>
+          <p className={styles.ingredients}>Ingredients: {formattedIngredients}</p>
         </div>
-        <h3 className={styles.title}>{title}</h3>
-        <div className={styles.complexity}>
-          <span style={{ backgroundColor: difficultyColor[difficulty] }}>{difficulty}</span>
-          <span style={{ backgroundColor: preparationTimeColor[preparationTime] }}>{preparationTime}</span>
+        <div className={styles.footer}>
+          <div className={styles.difficulty}>
+            <p>{recipe.difficulty}</p>
+          </div>
+          <div className={styles.preparationTime}>
+            <p>{recipe.preparationTime}</p>
+          </div>
         </div>
-        <div className={styles.categories}>
-          {categories.map((category) => (
-            <span key={category} className={styles.category} style={{ backgroundColor: categoryColor[category] }}>
-              {category}
-            </span>
-          ))}
-        </div>
+        <Link to={`/recipe/${recipe._id}`} className={styles.buttonPreparation}>
+          Open Recipe
+        </Link>
       </div>
-    </Link>
+    </div>
   )
 }
+
+export default RecipeCard
