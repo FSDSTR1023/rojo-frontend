@@ -19,7 +19,7 @@ export default function useUser(id) {
         setState(FETCH_STATE.ERROR)
         console.error(err)
       })
-  }, [])
+  }, [id])
 
   return {
     user,
