@@ -14,6 +14,11 @@ export const createRecipe = (recipe) => axios.post('/', recipe)
 
 export const updateRecipe = (recipe) => axios.put(`/recipe/${recipe.id}`, recipe)
 
+//PATCH
+
+export const addOpinion = (id, opinion) => axios.patch(`/recipe/opinion/add/${id}`, opinion)
+
 //DELETE
 
 export const deleteRecipe = (id) => axios.delete(`/recipe/${id}`)
+

@@ -5,19 +5,21 @@ export const getAllUsers = () => axios.get('/user')
 
 export const getUserById = (id) => axios.get(`/user/${id}`)
 
-export const getUserProfile = () => axios.get('/user/profile')
+export const checkAuthToken = () => axios.get('/user/authWithToken')
 
 //POST
 export const loginUser = (data) => axios.post('/user/login', data)
 
-export const registerRequest = (data) => axios.post('/user', data)
+export const logoutUser = () => axios.post('/user/logout')
 
-export const addFavoriteRecipe = (data) => axios.post('/user/favorite', data)
+export const registerRequest = (data) => axios.post('/user', data)
 
 //PUT
 
 export const updateUser = (data) => axios.put(`/user/${id}`, data)
 
-//DELETE
+//PATCH
 
-export const removeFavoriteRecipe = (data) => axios.delete('/user', { data })
+export const addFavoriteRecipe = (data) => axios.patch(`/user/favorite/add/${id}`, data)
+
+export const removeFavoriteRecipe = (data) => axios.patch(`/user/favorite/remove/${id}`, data)
