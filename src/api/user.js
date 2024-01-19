@@ -20,6 +20,6 @@ export const updateUser = (data) => axios.put(`/user/${id}`, data)
 
 //PATCH
 
-export const addFavoriteRecipe = (data) => axios.patch(`/user/favorite/add/${id}`, data)
+export const addFavoriteRecipe = (id) => axios.patch(`/user/favorite/add/${id}`)
 
-export const removeFavoriteRecipe = (data) => axios.patch(`/user/favorite/remove/${id}`, data)
+export const removeFavoriteRecipe = (id) => axios.patch(`/user/favorite/remove/${id}`)
