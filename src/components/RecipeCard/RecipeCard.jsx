@@ -1,30 +1,15 @@
 import { useState } from 'react'
-import { addFavoriteRecipe, removeFavoriteRecipe } from '../../api/user'
 import { useProfile } from '../../context/ProfileContext'
 import styles from './RecipeCard.module.css'
 import { Link } from 'react-router-dom'
 
 const RecipeCard = ({ recipe }) => {
-  const { profile } = useProfile()
-  const [isFavorite, setIsFavorite] = useState(profile.favRecipes.includes(recipe.id))
-  //console.log(profile)
+  const { profile, toggleFavorite } = useProfile()
+  const [isFavorite, setIsFavorite] = useState(profile.favRecipes.includes(recipe._id))
 
   const handleClick = async (id) => {
-    if (profile) {
-      try {
-        if (isFavorite) {
-          await removeFavoriteRecipe(id)
-          setIsFavorite(false)
-        } else {
-          await addFavoriteRecipe(id)
-          setIsFavorite(true)
-        }
-      } catch (error) {
-        console.error('Error al realizar la acción:', error.message)
-      }
-    } else {
-      console.error('Profile o token no disponible')
-    }
+    await toggleFavorite(id)
+    setIsFavorite((f) => !f)
   }
   const formattedIngredients = recipe.ingredients.slice(0, -1).join(', ') + ', ' + recipe.ingredients.slice(-1)[0] + '.'
 
