@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { deleteOpinion as deleteOpinionApi, getRecipeById } from '../api/recipe'
+import { addOpinion as addOpinionRequest, deleteOpinion as deleteOpinionRequest, getRecipeById } from '../api/recipe'
 import { FETCH_STATUS } from '../constants/fetchStatus'
 import { useParams } from 'react-router-dom'
 
@@ -27,23 +27,21 @@ export function RecipeProvider({ children }) {
       })
   }, [])
 
-  const setOpinion = (newOpinion) => {
-    setRecipe((prevRecipe) => {
-      // Obtain previous opinions and add new one
-      const updatedOpinions = prevRecipe.opinions
-      updatedOpinions.push(newOpinion)
-
-      // Update recipe with new array of opinions
-      const updatedRecipe = {
-        ...prevRecipe,
-        opinions: updatedOpinions,
-      }
-      return updatedRecipe
-    })
+  const addOpinion = (rating, text) => {
+    addOpinionRequest(id, rating, text)
+      .then((response) => {
+        const { updatedOpinion, updatedRating } = response.data
+        setRecipe((prevRecipe) => ({
+          ...prevRecipe,
+          opinions: [...opinions, updatedOpinion],
+          rating: updatedRating,
+        }))
+      })
+      .catch((err) => console.log(err))
   }
 
   const deleteOpinion = (opinionId) => {
-    deleteOpinionApi(recipe._id, opinionId)
+    deleteOpinionRequest(id, opinionId)
       .then((response) => {
         const { updatedRating } = response.data
         setRecipe((prevRecipe) => ({
@@ -70,7 +68,7 @@ export function RecipeProvider({ children }) {
         rating,
         status,
         error,
-        setOpinion,
+        addOpinion,
         deleteOpinion,
       }}
     >
