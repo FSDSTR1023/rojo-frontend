@@ -1,9 +1,14 @@
-import { createContext, useEffect, useState } from 'react'
-import { getRecipeById } from '../api/recipe'
+import { createContext, useContext, useEffect, useState } from 'react'
+import {
+  addOpinion as addOpinionRequest,
+  deleteOpinion as deleteOpinionRequest,
+  updateOpinion as updateOpinionRequest,
+  getRecipeById,
+} from '../api/recipe'
 import { FETCH_STATUS } from '../constants/fetchStatus'
 import { useParams } from 'react-router-dom'
 
-const RecipeContext = createContext(null)
+export const RecipeContext = createContext(null)
 
 export function RecipeProvider({ children }) {
   const { id } = useParams()
@@ -11,7 +16,8 @@ export function RecipeProvider({ children }) {
   const [status, setStatus] = useState(FETCH_STATUS.LOADING)
   const [error, setError] = useState(null)
 
-  const { title, imageUrl, ingredients, difficulty, preparationTime, categories, preparation, opinions } = recipe
+  const { title, imageUrl, ingredients, difficulty, preparationTime, categories, preparation, opinions, rating } =
+    recipe
 
   useEffect(() => {
     getRecipeById(id)
@@ -26,19 +32,43 @@ export function RecipeProvider({ children }) {
       })
   }, [])
 
-  const setOpinion = (newOpinion) => {
-    setRecipe((prevRecipe) => {
-      // Obtain previous opinions and add new one
-      const updatedOpinions = prevRecipe.opinions
-      updatedOpinions.push(newOpinion)
+  const addOpinion = (text, rating) => {
+    addOpinionRequest(id, text, rating)
+      .then((response) => {
+        const { updatedOpinion, updatedRating } = response.data
+        setRecipe((prevRecipe) => ({
+          ...prevRecipe,
+          opinions: [...opinions, updatedOpinion],
+          rating: updatedRating,
+        }))
+      })
+      .catch((err) => console.log(err))
+  }
 
-      // Update recipe with new array of opinions
-      const updatedRecipe = {
-        ...prevRecipe,
-        opinions: updatedOpinions,
-      }
-      return updatedRecipe
-    })
+  const deleteOpinion = (opinionId) => {
+    deleteOpinionRequest(id, opinionId)
+      .then((response) => {
+        const { updatedRating } = response.data
+        setRecipe((prevRecipe) => ({
+          ...prevRecipe,
+          opinions: prevRecipe.opinions.filter((o) => o._id !== opinionId),
+          rating: updatedRating,
+        }))
+      })
+      .catch((err) => console.log(err))
+  }
+
+  const updateOpinion = (text, rating, opinionId) => {
+    updateOpinionRequest(id, text, rating, opinionId)
+      .then((response) => {
+        const { updatedOpinion, updatedRating } = response.data
+        setRecipe((prevRecipe) => ({
+          ...prevRecipe,
+          opinions: opinions.map((o) => (o._id === opinionId ? updatedOpinion : o)),
+          rating: updatedRating,
+        }))
+      })
+      .catch((err) => console.log(err))
   }
 
   return (
@@ -53,9 +83,12 @@ export function RecipeProvider({ children }) {
         categories,
         preparation,
         opinions,
+        rating,
         status,
         error,
-        setOpinion,
+        addOpinion,
+        deleteOpinion,
+        updateOpinion,
       }}
     >
       {children}
@@ -63,4 +96,12 @@ export function RecipeProvider({ children }) {
   )
 }
 
-export default RecipeContext
+export const useRecipe = () => {
+  const context = useContext(RecipeContext)
+
+  if (!context) {
+    throw new Error('useProfile has to be inside ProfileProvider')
+  }
+
+  return context
+}
