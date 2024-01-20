@@ -1,9 +1,9 @@
-import { createContext, useEffect, useState } from 'react'
-import { getRecipeById } from '../api/recipe'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { deleteOpinion as deleteOpinionApi, getRecipeById } from '../api/recipe'
 import { FETCH_STATUS } from '../constants/fetchStatus'
 import { useParams } from 'react-router-dom'
 
-const RecipeContext = createContext(null)
+export const RecipeContext = createContext(null)
 
 export function RecipeProvider({ children }) {
   const { id } = useParams()
@@ -11,7 +11,8 @@ export function RecipeProvider({ children }) {
   const [status, setStatus] = useState(FETCH_STATUS.LOADING)
   const [error, setError] = useState(null)
 
-  const { title, imageUrl, ingredients, difficulty, preparationTime, categories, preparation, opinions } = recipe
+  const { title, imageUrl, ingredients, difficulty, preparationTime, categories, preparation, opinions, rating } =
+    recipe
 
   useEffect(() => {
     getRecipeById(id)
@@ -41,6 +42,19 @@ export function RecipeProvider({ children }) {
     })
   }
 
+  const deleteOpinion = (opinionId) => {
+    deleteOpinionApi(recipe._id, opinionId)
+      .then((response) => {
+        const { updatedRating } = response.data
+        setRecipe((prevRecipe) => ({
+          ...prevRecipe,
+          opinions: prevRecipe.opinions.filter((o) => o._id !== opinionId),
+          rating: updatedRating,
+        }))
+      })
+      .catch((err) => console.log(err))
+  }
+
   return (
     <RecipeContext.Provider
       value={{
@@ -53,9 +67,11 @@ export function RecipeProvider({ children }) {
         categories,
         preparation,
         opinions,
+        rating,
         status,
         error,
         setOpinion,
+        deleteOpinion,
       }}
     >
       {children}
@@ -63,4 +79,12 @@ export function RecipeProvider({ children }) {
   )
 }
 
-export default RecipeContext
+export const useRecipe = () => {
+  const context = useContext(RecipeContext)
+
+  if (!context) {
+    throw new Error('useProfile has to be inside ProfileProvider')
+  }
+
+  return context
+}

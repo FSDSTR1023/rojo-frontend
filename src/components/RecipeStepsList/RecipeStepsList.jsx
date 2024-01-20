@@ -1,9 +1,8 @@
-import { useContext } from 'react'
 import styles from './RecipeStepsList.module.css'
-import RecipeContext from '../../context/RecipeContext'
+import { useRecipe } from '../../context/RecipeContext'
 
 export default function RecipeStepsList() {
-  const { preparation } = useContext(RecipeContext)
+  const { preparation } = useRecipe()
 
   return (
     <div>

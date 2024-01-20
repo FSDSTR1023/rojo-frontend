@@ -5,10 +5,12 @@ import { FETCH_STATE } from '../../constants/fetchState'
 import EditIcon from '../EditIcon'
 import DeleteIcon from '../DeleteIcon'
 import { useProfile } from '../../context/ProfileContext'
+import { useRecipe } from '../../context/RecipeContext'
 
-export default function Opinion({ text, rating, user: userId }) {
+export default function Opinion({ _id: id, text, rating, user: userId }) {
   const { user, state, error } = useUser(userId)
   const { profile } = useProfile()
+  const { deleteOpinion } = useRecipe()
 
   const isOwner = profile._id === user._id
 
@@ -18,6 +20,10 @@ export default function Opinion({ text, rating, user: userId }) {
 
   if (state === FETCH_STATE.ERROR) {
     return <div>Error: {error}</div>
+  }
+
+  const handleDelete = () => {
+    deleteOpinion(id)
   }
 
   return (
@@ -37,7 +43,7 @@ export default function Opinion({ text, rating, user: userId }) {
       {isOwner && (
         <div className={styles.actions}>
           <EditIcon className={styles.edit} />
-          <DeleteIcon className={styles.delete} />
+          <DeleteIcon className={styles.delete} onClick={handleDelete} />
         </div>
       )}
     </div>
