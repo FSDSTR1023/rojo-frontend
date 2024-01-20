@@ -3,11 +3,11 @@ import styles from './Opinion.module.css'
 import Star from '../Star'
 import { useRecipe } from '../../context/RecipeContext'
 
-export default function OpinionEdit({ setIsEdit }) {
-  const [rating, setRating] = useState(3)
-  const [text, setText] = useState('')
+export default function OpinionEdit({ initialText = '', initialRating = 3, opinionId, setIsEdit }) {
+  const [rating, setRating] = useState(initialRating)
+  const [text, setText] = useState(initialText)
 
-  const { addOpinion } = useRecipe()
+  const { addOpinion, updateOpinion } = useRecipe()
 
   const handleStarClick = (n) => {
     setRating(n + 1)
@@ -22,7 +22,8 @@ export default function OpinionEdit({ setIsEdit }) {
   }
 
   const handleSend = () => {
-    addOpinion(rating, text)
+    if (opinionId) updateOpinion(text, rating, opinionId)
+    else addOpinion(text, rating)
     setIsEdit(false)
   }
 
@@ -34,7 +35,7 @@ export default function OpinionEdit({ setIsEdit }) {
           return <Star key={i} className={starClass} onClick={() => handleStarClick(i)} />
         })}
       </div>
-      <input className={styles.text} type="textarea" onChange={handleTextChange} />
+      <input className={styles.text} type="textarea" value={text} onChange={handleTextChange} />
       <div className={styles.buttonsWrapper}>
         <button onClick={handleSend}>Send</button>
         <button onClick={handleCancel}>Cancel</button>

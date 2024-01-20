@@ -1,6 +1,5 @@
 import styles from './RecipeOpinionsList.module.css'
 import Opinion from '../Opinion'
-import OpinionAdd from '../Opinion/OpinionAdd'
 import { useRecipe } from '../../context/RecipeContext'
 
 export default function RecipeOpinionsList() {
@@ -16,7 +15,7 @@ export default function RecipeOpinionsList() {
           </div>
         ))}
         <div className={styles.bentoElement}>
-          <OpinionAdd />
+          <Opinion isAdd />
         </div>
       </div>
     </div>

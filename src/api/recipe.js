@@ -16,7 +16,7 @@ export const updateRecipe = (recipe) => axios.put(`/recipe/${recipe.id}`, recipe
 
 //PATCH
 
-export const addOpinion = (recipeId, rating, text) => axios.patch(`/recipe/opinion/add/${recipeId}`, { rating, text })
+export const addOpinion = (recipeId, text, rating) => axios.patch(`/recipe/opinion/add/${recipeId}`, { text, rating })
 
 export const deleteOpinion = (recipeId, opinionId) => axios.patch(`/recipe/opinion/delete/${recipeId}`, { opinionId })
 

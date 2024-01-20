@@ -1,5 +1,10 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { addOpinion as addOpinionRequest, deleteOpinion as deleteOpinionRequest, getRecipeById } from '../api/recipe'
+import {
+  addOpinion as addOpinionRequest,
+  deleteOpinion as deleteOpinionRequest,
+  updateOpinion as updateOpinionRequest,
+  getRecipeById,
+} from '../api/recipe'
 import { FETCH_STATUS } from '../constants/fetchStatus'
 import { useParams } from 'react-router-dom'
 
@@ -27,8 +32,8 @@ export function RecipeProvider({ children }) {
       })
   }, [])
 
-  const addOpinion = (rating, text) => {
-    addOpinionRequest(id, rating, text)
+  const addOpinion = (text, rating) => {
+    addOpinionRequest(id, text, rating)
       .then((response) => {
         const { updatedOpinion, updatedRating } = response.data
         setRecipe((prevRecipe) => ({
@@ -53,6 +58,19 @@ export function RecipeProvider({ children }) {
       .catch((err) => console.log(err))
   }
 
+  const updateOpinion = (text, rating, opinionId) => {
+    updateOpinionRequest(id, text, rating, opinionId)
+      .then((response) => {
+        const { updatedOpinion, updatedRating } = response.data
+        setRecipe((prevRecipe) => ({
+          ...prevRecipe,
+          opinions: opinions.map((o) => (o._id === opinionId ? updatedOpinion : o)),
+          rating: updatedRating,
+        }))
+      })
+      .catch((err) => console.log(err))
+  }
+
   return (
     <RecipeContext.Provider
       value={{
@@ -70,6 +88,7 @@ export function RecipeProvider({ children }) {
         error,
         addOpinion,
         deleteOpinion,
+        updateOpinion,
       }}
     >
       {children}
