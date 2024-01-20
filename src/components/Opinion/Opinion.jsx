@@ -2,9 +2,15 @@ import styles from './Opinion.module.css'
 import Star from '../Star'
 import useUser from '../../hooks/useUser'
 import { FETCH_STATE } from '../../constants/fetchState'
+import EditIcon from '../EditIcon'
+import DeleteIcon from '../DeleteIcon'
+import { useProfile } from '../../context/ProfileContext'
 
 export default function Opinion({ text, rating, user: userId }) {
   const { user, state, error } = useUser(userId)
+  const { profile } = useProfile()
+
+  const isOwner = profile._id === user._id
 
   if (state === FETCH_STATE.LOADING) {
     return <div>Loading...</div>
@@ -27,6 +33,13 @@ export default function Opinion({ text, rating, user: userId }) {
         })}
       </div>
       <p>{text}</p>
+
+      {isOwner && (
+        <div className={styles.actions}>
+          <EditIcon className={styles.edit} />
+          <DeleteIcon className={styles.delete} />
+        </div>
+      )}
     </div>
   )
 }
