@@ -3,31 +3,3 @@
   flex-direction: column;
   gap: 2rem;
 }
-
-.steps > * {
-  display: flex;
-  gap: 1rem;
-  padding: 1rem;
-  border-radius: 1rem;
-}
-
-.steps > *:nth-child(odd) {
-  background-image: linear-gradient(270deg, transparent, var(--clr-primary));
-}
-
-.steps > *:nth-child(even) {
-  background-image: linear-gradient(90deg, transparent, var(--clr-primary));
-  flex-direction: row-reverse;
-  text-align: right;
-}
-
-.stepNumber {
-  font-size: 3.5rem;
-  font-weight: 700;
-}
-
-.stepContent h4 {
-  font-size: 1.25em;
-  font-weight: 700;
-  padding: 0.5rem 0;
-}
