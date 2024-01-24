@@ -1,5 +1,6 @@
 import styles from './RecipeHeader.module.css'
 import { useRecipe } from '../../context/RecipeContext'
+import Tag from '../Tag'
 
 export default function RecipeHeader() {
   const { difficulty, preparationTime, categories, imageUrl } = useRecipe()
@@ -14,7 +15,7 @@ export default function RecipeHeader() {
 
       <div className={styles.categories}>
         {categories.map((category) => (
-          <span key={category}>{category}</span>
+          <Tag key={category}>{category}</Tag>
         ))}
       </div>
     </div>
