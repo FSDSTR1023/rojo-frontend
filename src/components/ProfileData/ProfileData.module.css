@@ -1,0 +1,31 @@
+.profileInformation {
+  padding: 1rem;
+  gap: 20px;
+}
+
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+
+.fieldInput {
+  background: none;
+  border: none;
+}
+
+.fieldInput:focus {
+  background: none;
+  border: none;
+  border-bottom: 2px solid black;
+}
+
+.fieldTitle {
+  font-weight: 700;
+}

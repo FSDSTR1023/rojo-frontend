@@ -16,7 +16,7 @@ export const registerRequest = (data) => axios.post('/user', data)
 
 //PUT
 
-export const updateUser = (data) => axios.put(`/user/${id}`, data)
+export const updateUser = ({ id, ...data }) => axios.put(`/user/${id}`, data)
 
 //PATCH
 

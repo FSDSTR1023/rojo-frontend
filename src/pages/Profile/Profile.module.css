@@ -45,8 +45,6 @@
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  padding: 3rem;
-  gap: 1rem;
 }
 
 .sectionTitle {
