@@ -1,9 +1,8 @@
-import { useContext } from 'react'
 import styles from './RecipeHeader.module.css'
-import RecipeContext from '../../context/RecipeContext'
+import { useRecipe } from '../../context/RecipeContext'
 
 export default function RecipeHeader() {
-  const { difficulty, preparationTime, categories, imageUrl } = useContext(RecipeContext)
+  const { difficulty, preparationTime, categories, imageUrl } = useRecipe()
 
   return (
     <div className={styles.imageWrapper}>

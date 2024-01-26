@@ -1,5 +1,5 @@
 import { useContext, useState, createContext, useEffect } from 'react'
-import { checkAuthToken, loginUser, logoutUser, updateUser, getAllUsers } from '../api/user'
+import { addFavoriteRecipe, checkAuthToken, loginUser, logoutUser, removeFavoriteRecipe, getAllUsers } from '../api/user'
 
 export const ProfileContext = createContext()
 
@@ -74,9 +74,23 @@ export const ProfileProvider = ({ children }) => {
   useEffect(() => {
     getSuggestions()
   }, [])
+  
+  
+  const toggleFavorite = async (recipeId) => {
+    try {
+      if (profile.favRecipes.includes(recipeId)) {
+        await removeFavoriteRecipe(recipeId)
+      } else {
+        await addFavoriteRecipe(recipeId)
+      }
+    } catch (error) {
+      console.error('Error al agregar receta favorita:', error.message)
+    }
+    getProfile()
+  }
 
   return (
-    <ProfileContext.Provider value={{ profile, isAuthenticated, login, logout, updateUserProfile, suggestions }}>
+    <ProfileContext.Provider value={{ profile, isAuthenticated, login, logout, updateUserProfile, toggleFavorite, suggestions }}>
       {children}
     </ProfileContext.Provider>
   )
