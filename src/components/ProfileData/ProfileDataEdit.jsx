@@ -71,13 +71,9 @@ export default function ProfileDataEdit({ setEditing }) {
           onChange={(e) => setEditableData({ ...editableData, description: e.target.value })}
         />
       </div>
-      <div className={styles.confirmButtons}>
-        <button className={styles.saveButton} onClick={handleUpdateUser}>
-          Save Changes
-        </button>
-        <button className={styles.cancelButton} onClick={handleCancel}>
-          Cancel
-        </button>
+      <div className={styles.updateButton}>
+        <button onClick={handleUpdateUser}>Save Changes</button>
+        <button onClick={handleCancel}>Cancel</button>
       </div>
     </div>
   )

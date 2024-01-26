@@ -29,3 +29,14 @@
 .fieldTitle {
   font-weight: 700;
 }
+
+.updateButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.updateButton button {
+  height: 40px;
+  padding: 10px;
+}

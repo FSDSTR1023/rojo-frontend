@@ -36,9 +36,9 @@ export default function ProfileData() {
             <p className={styles.fieldTitle}>Description</p>
             <p>{profile.description}</p>
           </div>
-          <button className={styles.updateButton} onClick={() => setEditing(true)}>
-            Edit Profile
-          </button>
+          <div className={styles.updateButton}>
+            <button onClick={() => setEditing(true)}>Edit Profile</button>
+          </div>
         </div>
       ) : (
         <ProfileDataEdit setEditing={setEditing} />
