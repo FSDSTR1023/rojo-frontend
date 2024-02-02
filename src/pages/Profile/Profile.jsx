@@ -1,24 +1,33 @@
 import styles from './Profile.module.css'
-import { useProfile } from '../../context/ProfileContext'
 import ProfileData from '../../components/ProfileData/ProfileData'
 import ProfileCard from '../../components/ProfileCard'
-import FollowSuggestions from '../../components/FollowSuggestions'
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { getUserById } from '../../api/user'
+import { useProfile } from '../../context/ProfileContext'
+import ProfileUserData from '../../components/ProfileData/ProfileUserData'
 
 export default function Profile() {
   const { profile } = useProfile()
+  const { id } = useParams()
+  const [user, setUser] = useState({})
 
-  if (!profile || !profile.name) {
-    return <div>Loading...</div>
-  }
+  useEffect(() => {
+    {
+      getUserById(id).then((response) => setUser(response.data))
+    }
+  }, [id])
+
+  console.log('user', user)
+  console.log('profile', profile)
 
   return (
     <div className={styles.profile}>
       <aside>
-        <ProfileCard />
-        <FollowSuggestions />
+        <ProfileCard user={user} />
       </aside>
       <main className={styles.mainContent}>
-        <ProfileData />
+        {user._id !== profile._id ? <ProfileUserData user={user} /> : <ProfileData user={user} setUser={setUser} />}
       </main>
     </div>
   )
