@@ -1,48 +1,62 @@
 import styles from './ProfileData.module.css'
-import { useState } from 'react'
-import { useProfile } from '../../context/ProfileContext'
+import { useState, useEffect } from 'react'
 import ProfileDataEdit from './ProfileDataEdit'
+import { useProfile } from '../../context/ProfileContext'
+import FavRecipesWrapper from '../FavRecipes'
 
-export default function ProfileData() {
+export default function ProfileData({ user, setUser }) {
   const { profile } = useProfile()
   const [editing, setEditing] = useState(false)
 
+  useEffect(() => {
+    if (!editing) {
+      setUser(profile)
+    }
+  }, [profile, editing])
+
   return (
     <div className={styles.profileInformation}>
-      <h4>Profile information</h4>
       {!editing ? (
-        <div className={styles.profileContainer}>
-          <div className={styles.field}>
-            <p className={styles.fieldTitle}>Name</p>
-            <p className={styles.fieldData}>{profile.name}</p>
+        <div>
+          <div className={styles.header}>
+            <h4>Profile information</h4>
+            <button className={styles.updateButton} onClick={() => setEditing(true)}>
+              Edit Profile
+            </button>
           </div>
-          <div className={styles.field}>
-            <p className={styles.fieldTitle}>Last Name</p>
-            <p>{profile.lastName}</p>
-          </div>
-          <div className={styles.field}>
-            <p className={styles.fieldTitle}>Username</p>
-            <p>@{profile.userName}</p>
-          </div>
-          <div className={styles.field}>
-            <p className={styles.fieldTitle}>Email</p>
-            <p>{profile.email}</p>
-          </div>
-          <div className={styles.field}>
-            <p className={styles.fieldTitle}>Country</p>
-            <p>{profile.country}</p>
-          </div>
-          <div className={styles.field}>
-            <p className={styles.fieldTitle}>Description</p>
-            <p>{profile.description}</p>
-          </div>
-          <div className={styles.updateButton}>
-            <button onClick={() => setEditing(true)}>Edit Profile</button>
+          <div className={styles.profileContainer}>
+            <div className={styles.field}>
+              <p className={styles.fieldTitle}>Name</p>
+              <p className={styles.fieldData}>{user.name}</p>
+            </div>
+            <div className={styles.field}>
+              <p className={styles.fieldTitle}>Last Name</p>
+              <p>{user.lastName}</p>
+            </div>
+            <div className={styles.field}>
+              <p className={styles.fieldTitle}>Username</p>
+              <p>@{user.userName}</p>
+            </div>
+            <div className={styles.field}>
+              <p className={styles.fieldTitle}>Email</p>
+              <p>{user.email}</p>
+            </div>
+            <div className={styles.field}>
+              <p className={styles.fieldTitle}>Country</p>
+              <p>{user.country}</p>
+            </div>
+            <div className={styles.field}>
+              <p className={styles.fieldTitle}>Description</p>
+              <p>{user.description}</p>
+            </div>
           </div>
         </div>
       ) : (
-        <ProfileDataEdit setEditing={setEditing} />
+        <ProfileDataEdit setEditing={setEditing} user={user} />
       )}
+      <div className={styles.field}>
+        <FavRecipesWrapper user={user} />
+      </div>
     </div>
   )
 }
