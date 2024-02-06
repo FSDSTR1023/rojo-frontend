@@ -1,6 +1,10 @@
 import styles from './ProfileCard.module.css'
+import FollowButton from '../FollowButton/FollowButton'
+import { useProfile } from '../../context/ProfileContext'
 
 export default function ProfileCard({ user }) {
+  const { profile } = useProfile()
+
   return (
     <div className={styles.sideBar}>
       <div className={styles.gradiant}></div>
@@ -25,6 +29,7 @@ export default function ProfileCard({ user }) {
             <span>{user.following?.length}</span>
           </div>
         </div>
+        {user._id !== profile._id && <FollowButton userId={user._id} />}
       </div>
     </div>
   )
