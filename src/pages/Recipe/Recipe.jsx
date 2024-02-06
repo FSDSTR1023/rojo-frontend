@@ -4,11 +4,10 @@ import RecipeHeader from '../../components/RecipeHeader'
 import RecipeStepsList from '../../components/RecipeStepsList'
 import RecipeIngredientsList from '../../components/RecipeIngredientsList'
 import RecipeOpinionsList from '../../components/RecipeOpinionsList'
-import { useContext } from 'react'
-import RecipeContext from '../../context/RecipeContext'
+import { useRecipe } from '../../context/RecipeContext'
 
 export default function Recipe() {
-  const { status, error, title } = useContext(RecipeContext)
+  const { status, error, title } = useRecipe()
 
   if (status === FETCH_STATUS.LOADING) {
     return <div>Loading...</div>

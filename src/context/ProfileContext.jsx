@@ -1,5 +1,13 @@
 import { useContext, useState, createContext, useEffect } from 'react'
-import { addFavoriteRecipe, checkAuthToken, loginUser, logoutUser, removeFavoriteRecipe } from '../api/user'
+import {
+  addFavoriteRecipe,
+  checkAuthToken,
+  loginUser,
+  logoutUser,
+  removeFavoriteRecipe,
+  getUserById,
+  updateUser,
+} from '../api/user'
 
 export const ProfileContext = createContext()
 
@@ -22,6 +30,15 @@ export const ProfileProvider = ({ children }) => {
     getProfile()
   }, [])
 
+  const getUserInformation = async (id) => {
+    try {
+      const user = await getUserById(id)
+      setProfile(user.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const login = async (data) => {
     loginUser(data)
       .then(() => {
@@ -40,6 +57,20 @@ export const ProfileProvider = ({ children }) => {
     })
   }
 
+  const updateUserProfile = async (data) => {
+    try {
+      if (profile) {
+        const { _id: id, ...userData } = data
+        const updatedUser = await updateUser({ id, ...userData })
+        setProfile(updatedUser.data)
+      } else {
+        console.error('updateUserProfile error: Profile is null')
+      }
+    } catch (error) {
+      console.error('updateUserProfile error:', error)
+    }
+  }
+
   const toggleFavorite = async (recipeId) => {
     try {
       if (profile.favRecipes.includes(recipeId)) {
@@ -54,7 +85,17 @@ export const ProfileProvider = ({ children }) => {
   }
 
   return (
-    <ProfileContext.Provider value={{ profile, isAuthenticated, login, logout, toggleFavorite }}>
+    <ProfileContext.Provider
+      value={{
+        profile,
+        isAuthenticated,
+        login,
+        logout,
+        updateUserProfile,
+        toggleFavorite,
+        getUserInformation,
+      }}
+    >
       {children}
     </ProfileContext.Provider>
   )

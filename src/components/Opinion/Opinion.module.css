@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  position: relative;
 }
 
 .starsWrapper {
@@ -72,4 +73,24 @@
 
 .buttonsWrapper button {
   padding: 0.5rem 1rem;
+}
+
+.actions {
+  position: absolute;
+  top: -1.5rem;
+  right: -1.5rem;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.actions > * {
+  height: 2rem;
+  cursor: pointer;
+}
+
+.edit {
+  color: yellowgreen;
+}
+.delete {
+  color: orangered;
 }
