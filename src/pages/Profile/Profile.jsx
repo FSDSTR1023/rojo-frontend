@@ -18,9 +18,6 @@ export default function Profile() {
     }
   }, [id])
 
-  console.log('user', user)
-  console.log('profile', profile)
-
   return (
     <div className={styles.profile}>
       <aside>

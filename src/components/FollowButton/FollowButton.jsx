@@ -9,8 +9,6 @@ function FollowButton({ userId }) {
   const handleFollowClick = async () => {
     try {
       const response = await addFollower(userId)
-      console.log(response)
-
       setIsFollowing(true)
     } catch (error) {
       console.error('Error:', error)
