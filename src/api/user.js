@@ -23,3 +23,7 @@ export const updateUser = (data) => axios.put(`/user/${id}`, data)
 export const addFavoriteRecipe = (id) => axios.patch(`/user/favorite/add/${id}`)
 
 export const removeFavoriteRecipe = (id) => axios.patch(`/user/favorite/remove/${id}`)
+
+export const addFollower = (id) => axios.patch(`/user/follower/add/${id}`)
+
+export const removeFollower = (id) => axios.patch(`/user/follower/remove/${id}`)
