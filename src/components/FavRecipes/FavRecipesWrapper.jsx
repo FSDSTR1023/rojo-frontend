@@ -6,9 +6,9 @@ export default function FavRecipesWrapper({ user }) {
     <div className={styles.favRecipesContainer}>
       <h6>Fav Recipes</h6>
       <div className={styles.favRecipesWrapper}>
-        {user.favRecipes?.map((recipe) => (
-          <FavRecipesCard key={recipe.id} recipe={recipe} />
-        ))}
+        {user.favRecipes?.map((recipe) => {
+          return <FavRecipesCard key={recipe._id} recipe={recipe} />
+        })}
       </div>
     </div>
   )

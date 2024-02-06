@@ -2,7 +2,7 @@ import styles from './Users.module.css'
 import { FETCH_STATE } from '../../constants/fetchState'
 import useUsers from '../../hooks/useUsers'
 import { Link } from 'react-router-dom'
-import FollowButton from '../../components/Follow/Follow'
+import FollowButton from '../../components/FollowButton/FollowButton'
 
 export default function Users() {
   const { users, state, error } = useUsers()
