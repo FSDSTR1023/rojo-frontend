@@ -2,6 +2,8 @@ import RecipeCard from '../../components/RecipeCard/RecipeCard'
 import styles from './Explore.module.css'
 import { useEffect, useState, useRef } from 'react'
 import { getAllRecipes } from '../../api/recipe'
+import { Link } from 'react-router-dom'
+import CreateRecipe from '../CreateRecipe/CreateRecipe'
 
 export default function Explore() {
   const [recipes, setRecipes] = useState([])
@@ -41,6 +43,9 @@ export default function Explore() {
 
   return (
     <div>
+      <Link className={styles.createButton} to="/recipe/create">
+        +
+      </Link>
       {Object.entries(groupedRecipes).map(([category, categoryRecipes]) => (
         <div className={styles.categoriesWrapper} key={category}>
           <h2 className={styles.categoriesTitle}>{category}</h2>
