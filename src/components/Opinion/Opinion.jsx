@@ -8,12 +8,12 @@ import OpinionDisplay from './OpinionDisplay'
 import OpinionAdd from './OpinionAdd'
 import OpinionEdit from './OpinionEdit'
 
-export default function Opinion({ _id: id, text, rating, user: userId, isAdd }) {
+export default function Opinion({ _id: id, text, rating, user, isAdd }) {
   const { profile } = useProfile()
   const { deleteOpinion } = useRecipe()
   const [isEdit, setIsEdit] = useState(false)
 
-  const isOwner = profile._id === userId
+  const isOwner = profile?._id === user?._id
 
   const handleEdit = () => {
     setIsEdit(true)
@@ -27,7 +27,7 @@ export default function Opinion({ _id: id, text, rating, user: userId, isAdd }) 
 
   return (
     <div className={styles.opinionWrapper}>
-      <OpinionDisplay text={text} rating={rating} userId={userId} />
+      <OpinionDisplay text={text} rating={rating} user={user} />
 
       {isOwner && (
         <div className={styles.actions}>
