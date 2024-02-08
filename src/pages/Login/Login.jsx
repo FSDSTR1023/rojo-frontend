@@ -1,6 +1,7 @@
 import styles from './Login.module.css'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { GoogleLogin } from '@react-oauth/google';
 import { useProfile } from '../../context/ProfileContext'
 import { useEffect } from 'react'
 
@@ -41,7 +42,7 @@ export default function Login() {
           />
         </div>
         {errors.email && <span className={styles.error}>{errors.email.message}</span>}
-
+         
         <div className={styles.field}>
           <label className={styles.label} htmlFor="password">
             Password:
@@ -54,6 +55,14 @@ export default function Login() {
             id="password"
           />
         </div>
+        <GoogleLogin
+           onSuccess={credentialResponse => {
+             console.log(credentialResponse);
+           }}
+             onError={() => {
+             console.log('Login Failed');
+           }}
+          />
         {errors.password && <span className={styles.error}>{errors.password.message}</span>}
 
         {errors.login && <span className={styles.error}>{errors.login.message}</span>}
@@ -61,5 +70,6 @@ export default function Login() {
         <button className={styles.button}>Send</button>
       </form>
     </div>
+    
   )
 }
