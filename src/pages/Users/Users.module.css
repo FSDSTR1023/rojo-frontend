@@ -23,6 +23,8 @@
 }
 
 .imageWrapper {
+  width: 200px;
+  height: 200px;
   overflow: hidden;
   background-position: center;
   background-size: cover;
