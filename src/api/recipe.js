@@ -2,7 +2,13 @@ import axios from './axios'
 
 //GET
 
-export const getAllRecipes = () => axios.get('/recipe')
+export const getAllRecipes = (filters) => {
+  const { difficulty, preparationTime } = filters
+  const queryParams = `${difficulty && `difficulty=${difficulty}`}&${
+    preparationTime && `preparationTime=${preparationTime}`
+  }`
+  return axios.get(`/recipe?${queryParams}`)
+}
 
 export const getRecipeById = (id) => axios.get(`/recipe/${id}`)
 

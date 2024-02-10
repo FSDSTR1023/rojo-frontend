@@ -6,7 +6,7 @@
 }
 
 .wrapper > * {
-  width: 100px;
+  width: 150px;
   background-color: var(--clr-light);
   border-radius: 0.25rem;
   padding: 0.75rem;

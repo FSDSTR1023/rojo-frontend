@@ -1,16 +1,8 @@
 import styles from './Filters.module.css'
-import { useState } from 'react'
 import { DIFFICULTY, PREPARATION_TIME } from '../../constants/recipe'
 import DropdownList from '../DropdownList'
 
-export default function Filters() {
-  const [filters, setFilters] = useState({
-    difficulty: DIFFICULTY[0],
-    preparationTime: PREPARATION_TIME[0],
-  })
-
-  console.log(filters)
-
+export default function Filters({ filters, setFilters }) {
   const handleChange = (key, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
