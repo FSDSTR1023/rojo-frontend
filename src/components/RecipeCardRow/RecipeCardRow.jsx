@@ -3,11 +3,11 @@ import RecipeCard from '../RecipeCard/RecipeCard'
 
 export default function RecipeCardRow({ category, categoryRecipes }) {
   return (
-    <div className={styles.categoriesWrapper} key={category}>
+    <div className={styles.categoriesWrapper}>
       <h2 className={styles.categoriesTitle}>{category}</h2>
       <div className={styles.categoriesCards}>
         {categoryRecipes.map((recipe) => (
-          <RecipeCard recipe={recipe} key={recipe._id} />
+          <RecipeCard recipe={recipe} key={`${category}-${recipe._id}`} />
         ))}
       </div>
     </div>

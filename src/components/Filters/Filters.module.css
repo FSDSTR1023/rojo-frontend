@@ -1,8 +1,17 @@
 .container {
   display: flex;
-  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
   background-color: var(--clr-secondary);
   border-radius: 1rem;
   padding: 1rem;
   margin: 1rem 0;
+}
+
+.container > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }

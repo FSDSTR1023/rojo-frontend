@@ -13,7 +13,7 @@ export default function Explore() {
       <Filters />
 
       {Object.entries(groupedRecipes).map(([category, categoryRecipes]) => (
-        <RecipeCardRow category={category} categoryRecipes={categoryRecipes} />
+        <RecipeCardRow key={category} category={category} categoryRecipes={categoryRecipes} />
       ))}
     </div>
   )
