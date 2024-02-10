@@ -1,7 +1,5 @@
 import styles from './Opinion.module.css'
 import Star from '../Star'
-import useUser from '../../hooks/useUser'
-import { FETCH_STATE } from '../../constants/fetchState'
 
 export default function OpinionDisplay({ text, rating, user }) {
   return (
