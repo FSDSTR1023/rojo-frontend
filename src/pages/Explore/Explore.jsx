@@ -3,14 +3,9 @@ import { groupRecipesByCategory } from '../../utils/recipe'
 import useRecipes from '../../hooks/useRecipes'
 import Filters from '../../components/Filters/Filters'
 import RecipeCardRow from '../../components/RecipeCardRow/RecipeCardRow'
-import { useState } from 'react'
 
 export default function Explore() {
-  const [filters, setFilters] = useState({
-    difficulty: '',
-    preparationTime: '',
-  })
-  const { recipes } = useRecipes(filters)
+  const { recipes, filters, setFilters } = useRecipes()
   const groupedRecipes = groupRecipesByCategory(recipes)
 
   return (

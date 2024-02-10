@@ -2,10 +2,15 @@ import { useEffect, useState } from 'react'
 import { getAllRecipes } from '../api/recipe'
 import { FETCH_STATE } from '../constants/fetchState'
 
-export default function useRecipes(filters) {
+export default function useRecipes() {
   const [recipes, setRecipes] = useState([])
   const [state, setState] = useState(FETCH_STATE.LOADING)
   const [error, setError] = useState(null)
+  const [filters, setFilters] = useState({
+    difficulty: '',
+    preparationTime: '',
+    categories: [],
+  })
 
   useEffect(() => {
     setState(FETCH_STATE.LOADING)
@@ -25,5 +30,7 @@ export default function useRecipes(filters) {
     recipes,
     state,
     error,
+    filters,
+    setFilters,
   }
 }
