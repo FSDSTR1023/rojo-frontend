@@ -1,5 +1,5 @@
 import styles from './RecipeCardRow.module.css'
-import RecipeCard from '../RecipeCard/RecipeCard'
+import RecipeCard from '../RecipeCard'
 
 export default function RecipeCardRow({ category, categoryRecipes }) {
   return (

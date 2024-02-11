@@ -16,10 +16,6 @@ export default function Filters({ filters, setFilters }) {
 
   return (
     <div className={styles.container}>
-      {/* <div>
-        <p>Title</p>
-        <input type="text" />
-      </div> */}
       <div className={styles.row}>
         <div>
           <p>Difficulty</p>
@@ -40,8 +36,7 @@ export default function Filters({ filters, setFilters }) {
             options={PREPARATION_TIME}
           />
         </div>
-
-        <div className={styles.row}>
+        <div>
           <p>Rating</p>
           <HorizontalSlider
             min={minRating}
@@ -50,19 +45,11 @@ export default function Filters({ filters, setFilters }) {
             setMax={(value) => handleChange('maxRating', value)}
           />
         </div>
-      </div>
-
-      <div className={styles.row}>
         <div>
           <p>Categories</p>
           <DropdownMultiSelect options={CATEGORIES} setState={(value) => handleChange('categories', value)} />
         </div>
       </div>
-
-      {/* <div>
-        <p>Ingredients</p>
-        <input type="text" />
-      </div> */}
     </div>
   )
 }

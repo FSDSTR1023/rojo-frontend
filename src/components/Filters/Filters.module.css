@@ -1,17 +1,24 @@
 .container {
+  position: sticky;
+  top: 100px;
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 1rem;
   background-color: var(--clr-secondary);
   border-radius: 1rem;
   padding: 1rem;
-  margin: 1rem 0;
+  margin: 0 0 2rem;
+  z-index: 100;
+  box-shadow: var(--shadow);
 }
 
 .row {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 2rem;
+  padding: 0 2rem;
 }
 
 .row > div {

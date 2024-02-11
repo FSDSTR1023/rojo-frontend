@@ -1,13 +1,20 @@
 .wrapper {
   display: flex;
+  align-items: center;
+  background-color: var(--clr-light);
+  border-radius: 0.25rem;
+}
+
+.select {
+  display: flex;
   flex-direction: column;
   position: relative;
   z-index: 10;
 }
 
-.wrapper > * {
+.select > * {
   width: 150px;
-  background-color: var(--clr-light);
+  background-color: transparent;
   border-radius: 0.25rem;
   padding: 0.75rem;
 }
@@ -18,6 +25,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background-color: var(--clr-light);
   box-shadow: var(--shadow);
 }
 
@@ -26,4 +34,13 @@
 }
 .option:hover {
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+}
+
+.reset {
+  background-color: inherit;
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+}
+.reset:hover {
+  background-color: rgba(255, 120, 120, 0.4);
 }
