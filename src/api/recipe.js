@@ -3,13 +3,17 @@ import axios from './axios'
 //GET
 
 export const getAllRecipes = (filters) => {
-  const { difficulty, preparationTime, categories } = filters
+  const { difficulty, preparationTime, categories, minRating, maxRating } = filters
 
   const difficultyFilter = difficulty && `difficulty=${difficulty}`
   const preparationTimeFilter = preparationTime && `preparationTime=${preparationTime}`
   const categoriesFilter = categories && categories.map((category) => `categories=${category}`)
+  const minRatingFilter = minRating > 0 && `minRating=${minRating}`
+  const maxRatingFilter = maxRating < 5 && `maxRating=${maxRating}`
 
-  const queryParams = [difficultyFilter, preparationTimeFilter, ...categoriesFilter].filter((e) => e).join('&')
+  const queryParams = [difficultyFilter, preparationTimeFilter, ...categoriesFilter, minRatingFilter, maxRatingFilter]
+    .filter((e) => e)
+    .join('&')
 
   return axios.get(`/recipe?${queryParams}`)
 }
