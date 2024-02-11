@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { addFollower, removeFollower } from '../../api/user.js'
 import { useProfile } from '../../context/ProfileContext.jsx'
 
-function FollowButton({ userId, onFollowUpdate, FollowCount }) {
+function FollowButton({ userId }) {
   const { profile } = useProfile()
   const [isFollowing, setIsFollowing] = useState(profile.following.includes(userId))
   const [followCount, setFollowCount] = useState(profile.following.length)
@@ -17,7 +17,6 @@ function FollowButton({ userId, onFollowUpdate, FollowCount }) {
       console.log(response)
 
       setIsFollowing(true)
-      onFollowUpdate(FollowCount + 1)
     } catch (error) {
       console.error('Error:', error)
     }
@@ -28,7 +27,6 @@ function FollowButton({ userId, onFollowUpdate, FollowCount }) {
       const response = await removeFollower(userId)
 
       setIsFollowing(false)
-      onFollowUpdate(FollowCount - 1)
     } catch (error) {
       console.error('Error:', error)
     }
@@ -39,9 +37,6 @@ function FollowButton({ userId, onFollowUpdate, FollowCount }) {
       <button onClick={isFollowing ? handleUnfollowClick : handleFollowClick}>
         {isFollowing ? 'Unfollow' : 'Follow'}
       </button>
-      <span>
-        <FollowCount count={followCount(profile, userId)} />
-      </span>
     </>
   )
 }
