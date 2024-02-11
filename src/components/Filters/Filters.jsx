@@ -1,9 +1,12 @@
 import styles from './Filters.module.css'
 import { CATEGORIES, DIFFICULTY, PREPARATION_TIME } from '../../constants/recipe'
-import DropdownList from '../DropdownList'
-import DropdownMultiSelect from '../DropdownMultiSelect'
+import DropdownList from '../atoms/DropdownList'
+import DropdownMultiSelect from '../atoms/DropdownMultiSelect'
+import Slider from '../atoms/Slider/Slider'
 
 export default function Filters({ filters, setFilters }) {
+  const { difficulty, preparationTime, categories, minRating, maxRating } = filters
+
   const handleChange = (key, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -22,7 +25,7 @@ export default function Filters({ filters, setFilters }) {
           <p>Difficulty</p>
 
           <DropdownList
-            state={filters.difficulty}
+            state={difficulty}
             setState={(value) => handleChange('difficulty', value)}
             options={DIFFICULTY}
           />
@@ -31,7 +34,7 @@ export default function Filters({ filters, setFilters }) {
           <p>Preparation Time</p>
 
           <DropdownList
-            state={filters.preparationTime}
+            state={preparationTime}
             setState={(value) => handleChange('preparationTime', value)}
             options={PREPARATION_TIME}
           />
@@ -48,10 +51,15 @@ export default function Filters({ filters, setFilters }) {
         <p>Ingredients</p>
         <input type="text" />
       </div> */}
-      {/* <div>
+      <div className={styles.row}>
         <p>Rating</p>
-        <input type="text" />
-      </div> */}
+        <Slider
+          min={minRating}
+          max={maxRating}
+          setMin={(value) => handleChange('minRating', value)}
+          setMax={(value) => handleChange('maxRating', value)}
+        />
+      </div>
     </div>
   )
 }

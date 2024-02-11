@@ -10,6 +10,8 @@ export default function useRecipes() {
     difficulty: '',
     preparationTime: '',
     categories: [],
+    minRating: 0,
+    maxRating: 5,
   })
 
   useEffect(() => {
