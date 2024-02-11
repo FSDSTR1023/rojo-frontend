@@ -1,0 +1,11 @@
+.categoriesWrapper {
+  display: flex;
+  flex-direction: column;
+}
+.categoriesTitle {
+  font-size: 24px;
+  font-weight: 600;
+}
+.categoriesCards {
+  display: flex;
+}
