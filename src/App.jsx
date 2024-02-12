@@ -9,6 +9,7 @@ import Users from './pages/Users/Users'
 import Recipe from './pages/Recipe'
 import { ProfileProvider } from './context/ProfileContext'
 import ProtectedRoutes from './components/ProtectedRoutes'
+import Home from './pages/Home'
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route path="*" element={<Navigate to="/" />} />
-            <Route path="/" element={<Navigate to="/explore" />} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
@@ -38,7 +39,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </ProfileProvider>
-
   )
 }
 
