@@ -10,11 +10,12 @@
 
 .fieldInput {
   background-color: white;
-  border: none;
+  border: transparent;
   border-radius: 0.25rem;
   padding: 0.5rem;
 }
 
-.fieldInput:focus {
-  border: none;
+.fieldInput:disabled {
+  color: black;
+  background-color: transparent;
 }
