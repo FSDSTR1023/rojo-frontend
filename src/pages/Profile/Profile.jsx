@@ -2,21 +2,11 @@ import styles from './Profile.module.css'
 import ProfileData from '../../components/ProfileData/ProfileData'
 import ProfileCard from '../../components/ProfileCard'
 import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { getUserById } from '../../api/user'
-import { useProfile } from '../../context/ProfileContext'
-import ProfileUserData from '../../components/ProfileData/ProfileUserData'
+import useUser from '../../hooks/useUser'
 
 export default function Profile() {
-  const { profile } = useProfile()
   const { id } = useParams()
-  const [user, setUser] = useState({})
-
-  useEffect(() => {
-    {
-      getUserById(id).then((response) => setUser(response.data))
-    }
-  }, [id])
+  const { user, setValue, getUser } = useUser(id)
 
   return (
     <div className={styles.profile}>
@@ -24,7 +14,7 @@ export default function Profile() {
         <ProfileCard user={user} />
       </aside>
       <main className={styles.mainContent}>
-        {user._id !== profile._id ? <ProfileUserData user={user} /> : <ProfileData user={user} setUser={setUser} />}
+        <ProfileData user={user} getUser={getUser} setValue={setValue} />
       </main>
     </div>
   )

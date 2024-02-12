@@ -1,59 +1,83 @@
 import styles from './ProfileData.module.css'
-import { useState, useEffect } from 'react'
-import ProfileDataEdit from './ProfileDataEdit'
-import { useProfile } from '../../context/ProfileContext'
+import { useState } from 'react'
 import FavRecipesWrapper from '../FavRecipes'
+import FormField from '../FormField/FormField'
+import { useProfile } from '../../context/ProfileContext'
 
-export default function ProfileData({ user, setUser }) {
-  const { profile } = useProfile()
+export default function ProfileData({ user, getUser, setValue }) {
+  const { profile, updateUserProfile } = useProfile()
   const [editing, setEditing] = useState(false)
 
-  useEffect(() => {
-    if (!editing) {
-      setUser(profile)
+  const handleUpdateUser = () => {
+    const update = async () => {
+      await updateUserProfile(user)
+      await getUser()
+      setEditing(false)
     }
-  }, [profile, editing])
+    update()
+  }
+
+  const handleCancel = () => {
+    getUser().then(() => setEditing(false))
+  }
 
   return (
     <div className={styles.profileInformation}>
-      {!editing ? (
-        <div>
-          <div className={styles.header}>
-            <h4>Profile information</h4>
-            <button className={styles.updateButton} onClick={() => setEditing(true)}>
-              Edit Profile
-            </button>
-          </div>
-          <div className={styles.profileContainer}>
-            <div className={styles.field}>
-              <p className={styles.fieldTitle}>Name</p>
-              <p className={styles.fieldData}>{user.name}</p>
-            </div>
-            <div className={styles.field}>
-              <p className={styles.fieldTitle}>Last Name</p>
-              <p>{user.lastName}</p>
-            </div>
-            <div className={styles.field}>
-              <p className={styles.fieldTitle}>Username</p>
-              <p>@{user.userName}</p>
-            </div>
-            <div className={styles.field}>
-              <p className={styles.fieldTitle}>Email</p>
-              <p>{user.email}</p>
-            </div>
-            <div className={styles.field}>
-              <p className={styles.fieldTitle}>Country</p>
-              <p>{user.country}</p>
-            </div>
-            <div className={styles.field}>
-              <p className={styles.fieldTitle}>Description</p>
-              <p>{user.description}</p>
-            </div>
+      <div>
+        <div className={styles.header}>
+          <h4>Profile information</h4>
+          <div className={styles.buttonContainer}>
+            {profile._id === user._id &&
+              (editing ? (
+                <>
+                  <button className={styles.updateButton} onClick={handleUpdateUser}>
+                    Save Changes
+                  </button>
+                  <button className={styles.updateButton} onClick={handleCancel}>
+                    Cancel
+                  </button>
+                </>
+              ) : (
+                <button className={styles.updateButton} onClick={() => setEditing(true)}>
+                  Edit Profile
+                </button>
+              ))}
           </div>
         </div>
-      ) : (
-        <ProfileDataEdit setEditing={setEditing} user={user} />
-      )}
+        <div className={styles.profileContainer}>
+          <FormField label="Name" value={user.name} setValue={(value) => setValue('name', value)} isEdit={editing} />
+          <FormField
+            label="Last Name"
+            value={user.lastName}
+            setValue={(value) => setValue('lastName', value)}
+            isEdit={editing}
+          />
+          <FormField
+            label="User Name"
+            value={user.userName}
+            setValue={(value) => setValue('userName', value)}
+            isEdit={editing}
+          />
+          <FormField
+            label="E-mail"
+            value={user.email}
+            setValue={(value) => setValue('email', value)}
+            isEdit={editing}
+          />
+          <FormField
+            label="Country"
+            value={user.country}
+            setValue={(value) => setValue('country', value)}
+            isEdit={editing}
+          />
+          <FormField
+            label="Description"
+            value={user.description}
+            setValue={(value) => setValue('description', value)}
+            isEdit={editing}
+          />
+        </div>
+      </div>
       <div className={styles.field}>
         <FavRecipesWrapper user={user} />
       </div>
