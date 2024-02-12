@@ -47,3 +47,16 @@
 .field input:hover {
   border: none;
 }
+.select {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: 300px;
+}
+
+.select > * {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: 300px;
+}

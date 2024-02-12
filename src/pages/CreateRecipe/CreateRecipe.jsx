@@ -2,16 +2,24 @@ import { useState } from 'react'
 import { createRecipe } from '../../api/recipe'
 import styles from './CreateRecipe.module.css'
 import ImageInput from '../../components/ImageInput'
+import RecipeStepsInput from '../../components/RecipeStepsInput'
+import Select from 'react-select'
+import CategoriesInput from '../../components/CategoriesInput'
+import IngredientsInput from '../../components/IngredientsInput/IngredientsInput'
+import { difficulty, preparationTime } from '../../api/constants'
+import { useProfile } from '../../context/ProfileContext'
 
 export default function CreateRecipe() {
+  const { profile } = useProfile()
   const [formData, setFormData] = useState({
     title: '',
     ingredients: [],
     preparation: [],
-    categories: '',
+    categories: [],
     difficulty: '',
-    preparationTime: [],
+    preparationTime: '',
     imageUrl: '',
+    author: { profile },
   })
 
   const handleChange = (e) => {
@@ -22,57 +30,23 @@ export default function CreateRecipe() {
     }))
   }
 
-  const handleIngredientsChange = (e, index) => {
-    const { value } = e.target
-    const updatedIngredients = [...formData.ingredients]
-    updatedIngredients[index] = value
-    setFormData((prevState) => ({
-      ...prevState,
-      ingredients: updatedIngredients,
-    }))
-  }
+  const handleChangeSelect = (selectedOption, { name }) => {
+    const selectedValue = selectedOption.value
 
-  const handlePreparationChange = (e, index) => {
-    const { name, value } = e.target
-    const updatedPreparation = [...formData.preparation]
-    updatedPreparation[index][name] = value
     setFormData((prevState) => ({
       ...prevState,
-      preparation: updatedPreparation,
-    }))
-  }
-
-  const handleAddIngredient = () => {
-    setFormData((prevState) => ({
-      ...prevState,
-      ingredients: [...prevState.ingredients, ''],
-    }))
-  }
-
-  const handleAddStep = () => {
-    setFormData((prevState) => ({
-      ...prevState,
-      preparation: [...prevState.preparation, { title: '', description: '' }],
+      [name]: selectedValue,
     }))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      // Subir la imagen a Cloudinary
-      const imageData = new FormData()
-      imageData.append('file', formData.imageFile)
-      imageData.append('upload_preset', 'kzcfcttj') // Reemplaza 'tu_upload_preset' con tu propio valor
-      const response = await fetch(import.meta.env.VITE_CLOUDINARY_URL, {
-        method: 'POST',
-        body: imageData,
-      })
-      const data = await response.json()
-
-      // Guardar la URL de la imagen en el estado del formulario
+      const imageData = prepareImageData(formData.imageFile)
+      const imageUrl = await uploadImageToCloudinary(imageData)
       setFormData((prevState) => ({
         ...prevState,
-        imageUrl: data.secure_url,
+        imageUrl: imageUrl,
       }))
 
       await createRecipe(formData)
@@ -86,9 +60,7 @@ export default function CreateRecipe() {
       <h4>Create new recipe</h4>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="title">
-            Title
-          </label>
+          <label htmlFor="title">Title</label>
           <input
             className={styles.input}
             type="text"
@@ -99,100 +71,26 @@ export default function CreateRecipe() {
           ></input>
         </div>
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="ingredients">
-            Ingredients
-          </label>
-          {formData.ingredients.map((ingredient, index) => (
-            <input
-              key={index}
-              className={styles.input}
-              type="text"
-              name="ingredients"
-              value={ingredient}
-              onChange={(e) => handleIngredientsChange(e, index)}
-              placeholder={`Ingredient ${index + 1}`}
-            />
-          ))}
-          <button type="button" onClick={handleAddIngredient}>
-            Add Ingredient
-          </button>
+          <IngredientsInput {...{ formData, setFormData }} />
         </div>
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="preparation">
-            Preparation
-          </label>
-          {formData.preparation.map((step, index) => (
-            <div key={index}>
-              <input
-                className={styles.input}
-                type="text"
-                name="title"
-                value={step.title}
-                onChange={(e) => handlePreparationChange(e, index)}
-                placeholder={`Step ${index + 1} title`}
-              />
-              <input
-                className={styles.input}
-                type="text"
-                name="description"
-                value={step.description}
-                onChange={(e) => handlePreparationChange(e, index)}
-                placeholder={`Step ${index + 1} description`}
-              />
-            </div>
-          ))}
-          <button type="button" onClick={handleAddStep}>
-            Add Step
-          </button>
+          <RecipeStepsInput {...{ formData, setFormData }} />
         </div>
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="categories">
-            Categories
-          </label>
-          <input
-            className={styles.input}
-            type="text"
-            name="categories"
-            value={formData.categories}
-            onChange={handleChange}
-            placeholder="Add categories..."
-          ></input>
+          <CategoriesInput {...{ formData, setFormData }} />
         </div>
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="difficulty">
-            Difficulty
-          </label>
-          <select className={styles.select} name="difficulty" value={formData.difficulty} onChange={handleChange}>
-            <option value="">Select Difficulty</option>
-            <option value="EASY">Easy</option>
-            <option value="MEDIUM">Medium</option>
-            <option value="HARD">Hard</option>
-          </select>
+          <label htmlFor="difficulty">Difficulty</label>
+          <Select options={difficulty} name="difficulty" onChange={handleChangeSelect} />
         </div>
 
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="time">
-            Preparation time
-          </label>
-          <select
-            className={styles.select}
-            name="preparationTime"
-            value={formData.preparationTime}
-            onChange={handleChange}
-          >
-            <option value="">Select Preparation Time</option>
-            <option value="FAST">Fast</option>
-            <option value="MODERATE">Moderate</option>
-            <option value="LONG">Long</option>
-          </select>
+          <label htmlFor="time">Preparation time</label>
+          <Select options={preparationTime} name="preparationTime" onChange={handleChangeSelect} />
         </div>
+
         <div className={styles.field}>
-          <ImageInput
-            formData={formData}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            imageUrl={formData.imageUrl}
-          />
+          <ImageInput formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />
         </div>
         <button type="submit">Publish Recipe</button>
       </form>
