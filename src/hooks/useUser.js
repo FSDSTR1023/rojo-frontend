@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getUserById } from '../api/user'
+import { getUserById, updateUser as updateUserRequest } from '../api/user'
 import { FETCH_STATE } from '../constants/fetchState'
 
 export default function useUser(id) {
@@ -8,6 +8,17 @@ export default function useUser(id) {
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    getUser()
+  }, [id])
+
+  const setValue = (field, value) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      [field]: value,
+    }))
+  }
+
+  const getUser = async () => {
     setState(FETCH_STATE.LOADING)
     getUserById(id)
       .then((response) => {
@@ -19,11 +30,13 @@ export default function useUser(id) {
         setState(FETCH_STATE.ERROR)
         console.error(err)
       })
-  }, [id])
+  }
 
   return {
     user,
     state,
     error,
+    setValue,
+    getUser,
   }
 }
