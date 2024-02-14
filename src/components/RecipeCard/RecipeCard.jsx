@@ -4,11 +4,12 @@ import styles from './RecipeCard.module.css'
 import { Link } from 'react-router-dom'
 
 const RecipeCard = ({ recipe }) => {
-  const { profile, toggleFavorite } = useProfile()
-  const [isFavorite, setIsFavorite] = useState(profile.favRecipes.includes(recipe._id))
+  // const { profile, toggleFavorite } = useProfile()
+  // const [isFavorite, setIsFavorite] = useState(profile.favRecipes.includes(recipe._id))
+  const [isFavorite, setIsFavorite] = useState(false)
 
   const handleClick = async (id) => {
-    await toggleFavorite(id)
+    // await toggleFavorite(id)
     setIsFavorite((f) => !f)
   }
   const formattedIngredients = recipe.ingredients.slice(0, -1).join(', ') + ', ' + recipe.ingredients.slice(-1)[0] + '.'

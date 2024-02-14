@@ -124,18 +124,10 @@
 }
 
 .contenedorGrid {
-  background-color: red;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 100px);
-  gap: 10px;
+  gap: 1rem;
   margin: 200px;
-}
-
-.item {
-  background-color: blue;
-  padding: 20px;
-  text-align: center;
 }
 
 #ventajas {

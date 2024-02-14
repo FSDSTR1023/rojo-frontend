@@ -2,7 +2,6 @@ import { getAllRecipes } from '../../api/recipe'
 import RecipeCard from '../../components/RecipeCard/RecipeCard'
 import styles from './Home.module.css'
 import { useState, useEffect } from 'react'
-// import { RecipeCard } from '../../components/RecipeCard/RecipeCard'
 
 export default function Home() {
   const [recipes, setRecipes] = useState({})
@@ -62,10 +61,10 @@ export default function Home() {
           {recipes?.length > 0 &&
             recipes?.slice(0, 8).map((recipe) => (
               <div className={styles.item}>
-                {/* <RecipeCard id={recipe._id} recipe={recipe} /> */}
-                <p id={recipe._id} recipe={recipe}>
+                <RecipeCard id={recipe._id} recipe={recipe} />
+                {/* <p id={recipe._id} recipe={recipe}>
                   {recipe.title}
-                </p>
+                </p> */}
               </div>
             ))}
         </div>
