@@ -8,6 +8,8 @@ import CategoriesInput from '../../components/CategoriesInput'
 import IngredientsInput from '../../components/IngredientsInput/IngredientsInput'
 import { difficulty, preparationTime } from '../../api/constants'
 import { useProfile } from '../../context/ProfileContext'
+import { prepareImageData, uploadImageToCloudinary } from '../../api/cloudinary'
+import { useNavigate } from 'react-router-dom'
 
 export default function CreateRecipe() {
   const { profile } = useProfile()
@@ -19,8 +21,10 @@ export default function CreateRecipe() {
     difficulty: '',
     preparationTime: '',
     imageUrl: '',
-    author: { profile },
+    author: profile ? profile._id : '',
   })
+
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -44,12 +48,17 @@ export default function CreateRecipe() {
     try {
       const imageData = prepareImageData(formData.imageFile)
       const imageUrl = await uploadImageToCloudinary(imageData)
+
       setFormData((prevState) => ({
         ...prevState,
         imageUrl: imageUrl,
       }))
-
-      await createRecipe(formData)
+      const recipe = await createRecipe({
+        ...formData,
+        imageUrl: imageUrl,
+      })
+      const recipeId = recipe.data._id
+      navigate(`/recipe/${recipeId}`)
     } catch (error) {
       console.error('Error al crear la receta: ', error)
     }
@@ -90,7 +99,7 @@ export default function CreateRecipe() {
         </div>
 
         <div className={styles.field}>
-          <ImageInput formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />
+          <ImageInput handleChange={handleChange} />
         </div>
         <button type="submit">Publish Recipe</button>
       </form>

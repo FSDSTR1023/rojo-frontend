@@ -7,7 +7,7 @@ export default function RecipeStepsInput({ formData, setFormData }) {
     if (initialRender) {
       setFormData((prevState) => ({
         ...prevState,
-        preparation: [''],
+        preparation: [{ title: '', description: '' }], // Modificación aquí
       }))
       setInitialRender(false)
     }
@@ -26,9 +26,10 @@ export default function RecipeStepsInput({ formData, setFormData }) {
   const handleAddStep = () => {
     setFormData((prevState) => ({
       ...prevState,
-      preparation: [...prevState.preparation, { title: '', description: '' }],
+      preparation: [...prevState.preparation, { title: '', description: '' }], // Modificación aquí
     }))
   }
+
   return (
     <>
       <label htmlFor="preparation">Preparation</label>
