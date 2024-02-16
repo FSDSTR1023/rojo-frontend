@@ -10,6 +10,7 @@ import Recipe from './pages/Recipe'
 import { ProfileProvider } from './context/ProfileContext'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import Home from './pages/Home'
+import CreateRecipe from './pages/CreateRecipe/CreateRecipe'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
                   </RecipeProvider>
                 }
               />
+              <Route path="/recipe/create" element={<CreateRecipe />} />
             </Route>
           </Route>
         </Routes>

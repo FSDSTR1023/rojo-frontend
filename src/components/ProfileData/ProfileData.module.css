@@ -1,0 +1,27 @@
+.profileInformation {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.updateButton {
+  height: 40px;
+  padding: 10px;
+}
+
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

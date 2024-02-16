@@ -6,32 +6,41 @@
 }
 
 .profileCard {
+  --card-width: 240px;
+
   background-color: var(--clr-primary);
   padding: 1rem;
   border-radius: 1rem;
   display: grid;
   gap: 0.5rem;
-  grid-template-rows: 1fr 180px 1fr 4fr;
-  height: 300px;
-  width: 200px;
-  cursor: pointer;
+  width: var(--card-width);
 }
 
 .userName {
   font-size: 2em;
   font-weight: 700;
+  margin: 0;
+
+  /* Cut text with dots */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: var(--card-width);
+  height: 1.2em;
+  white-space: nowrap;
 }
 
-.imageWrapper {
-  overflow: hidden;
-  background-position: center;
-  background-size: cover;
+.image {
+  width: var(--card-width);
+  height: var(--card-width);
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
 }
 
 .description {
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* Maximum number of lines */
-  line-clamp: 3;
+  -webkit-line-clamp: 2; /* Maximum number of lines */
+  line-clamp: 2;
   -webkit-box-orient: vertical; /*Adds dots at ther end */
 }

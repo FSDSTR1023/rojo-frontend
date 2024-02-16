@@ -1,0 +1,53 @@
+.sideBar {
+  width: 300px;
+  border-radius: 1rem;
+  padding-bottom: 20px;
+  background: white;
+  text-align: center;
+}
+
+.gradiant {
+  background-color: var(--clr-primary);
+  height: 125px;
+  border-radius: 1rem 1rem 0px 0px;
+}
+
+.profileImage {
+  height: 150px;
+  width: 150px;
+  border-radius: 100px;
+  margin-top: -75px;
+  padding: 5px;
+  background: var(--clr-light);
+  object-fit: cover;
+  object-position: center;
+}
+
+.profileTitle {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.profileFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 20px;
+}
+
+.footerData {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  align-items: center;
+}
+
+.footerData p {
+  font-size: small;
+}
+
+.footerData span {
+  padding: 10px 10px 0px 10px;
+  font-size: large;
+  font-weight: 700;
+}

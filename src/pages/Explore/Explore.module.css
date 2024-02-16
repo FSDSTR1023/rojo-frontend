@@ -1,11 +1,16 @@
-.categoriesWrapper {
-  display: flex;
-  flex-direction: column;
+.container {
+  padding: 2rem;
 }
-.categoriesTitle {
-  font-size: 24px;
-  font-weight: 600;
-}
-.categoriesCards {
-  display: flex;
+
+.createButton {
+  font-weight: 700;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 100%;
+  background-color: var(--clr-primary);
+  z-index: 999;
+  font-size: x-large;
 }
