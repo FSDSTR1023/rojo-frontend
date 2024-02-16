@@ -9,6 +9,7 @@ import Users from './pages/Users/Users'
 import Recipe from './pages/Recipe'
 import { ProfileProvider } from './context/ProfileContext'
 import ProtectedRoutes from './components/ProtectedRoutes'
+import CreateRecipe from './pages/CreateRecipe/CreateRecipe'
 
 function App() {
   return (
@@ -33,12 +34,12 @@ function App() {
                   </RecipeProvider>
                 }
               />
+              <Route path="/recipe/create" element={<CreateRecipe />} />
             </Route>
           </Route>
         </Routes>
       </BrowserRouter>
     </ProfileProvider>
-
   )
 }
 

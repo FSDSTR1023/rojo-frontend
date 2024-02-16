@@ -22,7 +22,7 @@ export const getRecipeById = (id) => axios.get(`/recipe/${id}`)
 
 //POST
 
-export const createRecipe = (recipe) => axios.post('/', recipe)
+export const createRecipe = (recipe) => axios.post('/recipe', recipe)
 
 //PUT
 
