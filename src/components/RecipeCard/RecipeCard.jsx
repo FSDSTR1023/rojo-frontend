@@ -1,25 +1,12 @@
-import { useState } from 'react'
-import { useProfile } from '../../context/ProfileContext'
 import styles from './RecipeCard.module.css'
 import { Link } from 'react-router-dom'
 
 const RecipeCard = ({ recipe }) => {
-  // const { profile, toggleFavorite } = useProfile()
-  // const [isFavorite, setIsFavorite] = useState(profile.favRecipes.includes(recipe._id))
-  const [isFavorite, setIsFavorite] = useState(false)
-
-  const handleClick = async (id) => {
-    // await toggleFavorite(id)
-    setIsFavorite((f) => !f)
-  }
   const formattedIngredients = recipe.ingredients.slice(0, -1).join(', ') + ', ' + recipe.ingredients.slice(-1)[0] + '.'
 
   return (
     <div className={styles.recipeWrapper}>
       <div className={styles.recipeTop}>
-        <button onClick={() => handleClick(recipe._id)} className={styles.favoriteButton}>
-          {isFavorite ? '❤️' : '🩶'}
-        </button>
         <img className={styles.image} src={recipe.imageUrl} alt="recipe-image" />
       </div>
       <div className={styles.recipeContent}>

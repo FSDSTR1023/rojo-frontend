@@ -2,6 +2,7 @@ import RecipeCard from '../../components/RecipeCard/RecipeCard'
 import styles from './Explore.module.css'
 import { useEffect, useState, useRef } from 'react'
 import { getAllRecipes } from '../../api/recipe'
+import Favorite from '../../components/Favorite'
 
 export default function Explore() {
   const [recipes, setRecipes] = useState([])
@@ -46,7 +47,9 @@ export default function Explore() {
           <h2 className={styles.categoriesTitle}>{category}</h2>
           <div className={styles.categoriesCards} ref={categoriesRef}>
             {categoryRecipes.map((recipe) => (
-              <RecipeCard recipe={recipe} key={recipe._id} load={load} setLoad={setLoad} />
+              <Favorite key={recipe._id} recipe={recipe}>
+                <RecipeCard recipe={recipe} load={load} setLoad={setLoad} />
+              </Favorite>
             ))}
           </div>
         </div>

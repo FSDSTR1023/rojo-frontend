@@ -8,7 +8,7 @@ export default function Home() {
   useEffect(() => {
     getAllRecipes().then((response) => setRecipes(response.data))
   }, [])
-  console.log(recipes)
+
   return (
     <div>
       <section id={styles.hero}>
@@ -60,11 +60,8 @@ export default function Home() {
         <div className={styles.contenedorGrid}>
           {recipes?.length > 0 &&
             recipes?.slice(0, 8).map((recipe) => (
-              <div className={styles.item}>
+              <div key={recipe._id} className={styles.item}>
                 <RecipeCard id={recipe._id} recipe={recipe} />
-                {/* <p id={recipe._id} recipe={recipe}>
-                  {recipe.title}
-                </p> */}
               </div>
             ))}
         </div>
