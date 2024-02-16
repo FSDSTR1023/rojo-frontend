@@ -19,6 +19,8 @@
   margin-top: -75px;
   padding: 5px;
   background: var(--clr-light);
+  object-fit: cover;
+  object-position: center;
 }
 
 .profileTitle {

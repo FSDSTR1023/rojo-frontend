@@ -1,18 +1,7 @@
 import styles from './Opinion.module.css'
 import Star from '../Star'
-import useUser from '../../hooks/useUser'
-import { FETCH_STATE } from '../../constants/fetchState'
 
-export default function OpinionDisplay({ text, rating, userId }) {
-  const { user, state, error } = useUser(userId)
-
-  if (state === FETCH_STATE.LOADING) {
-    return <div>Loading...</div>
-  }
-
-  if (state === FETCH_STATE.ERROR) {
-    return <div>Error: {error}</div>
-  }
+export default function OpinionDisplay({ text, rating, user }) {
   return (
     <>
       <div className={styles.userWrapper}>

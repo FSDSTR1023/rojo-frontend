@@ -2,6 +2,7 @@ import styles from './Users.module.css'
 import { FETCH_STATE } from '../../constants/fetchState'
 import useUsers from '../../hooks/useUsers'
 import { Link } from 'react-router-dom'
+import FollowButton from '../../components/FollowButton/FollowButton'
 
 export default function Users() {
   const { users, state, error } = useUsers()
@@ -17,12 +18,16 @@ export default function Users() {
   return (
     <div className={styles.profileWrapper}>
       {users.map(({ _id: id, userName, imageUrl, country, description }) => (
-        <Link to={`/profile/${id}`} key={id} className={styles.profileCard}>
+        <div key={id} className={styles.profileCard}>
           <h3 className={styles.userName}>{userName}</h3>
-          <div className={styles.imageWrapper} style={{ backgroundImage: `url(${imageUrl})` }} />
+          <Link to={`/profile/${id}`}>
+            <img className={styles.image} src={imageUrl} alt={`${userName}'s profile image`} />
+          </Link>
           <p className={styles.country}>{country}</p>
           <p className={styles.description}>{description}</p>
-        </Link>
+
+          <FollowButton userId={id} />
+        </div>
       ))}
     </div>
   )
