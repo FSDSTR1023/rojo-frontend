@@ -14,11 +14,12 @@ export default function Explore() {
       <Link className={styles.createButton} to="/recipe/create">
         +
       </Link>
-    <div className={styles.container}>
-      <Filters filters={filters} setFilters={setFilters} />
-      {Object.entries(groupedRecipes).map(([category, categoryRecipes]) => (
-        <RecipeCardRow key={category} category={category} categoryRecipes={categoryRecipes} />
-      ))}
+      <div className={styles.container}>
+        <Filters filters={filters} setFilters={setFilters} />
+        {Object.entries(groupedRecipes).map(([category, categoryRecipes]) => (
+          <RecipeCardRow key={category} category={category} categoryRecipes={categoryRecipes} />
+        ))}
+      </div>
     </div>
   )
 }
