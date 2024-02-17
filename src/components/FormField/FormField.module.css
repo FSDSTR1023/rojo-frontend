@@ -1,0 +1,21 @@
+.field {
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+
+.fieldTitle {
+  font-weight: 700;
+}
+
+.fieldInput {
+  background-color: white;
+  border: transparent;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+}
+
+.fieldInput:disabled {
+  color: black;
+  background-color: transparent;
+}

@@ -1,8 +1,10 @@
 import styles from './RecipeOpinionsList.module.css'
 import Opinion from '../Opinion'
 import { useRecipe } from '../../context/RecipeContext'
+import { useProfile } from '../../context/ProfileContext'
 
 export default function RecipeOpinionsList() {
+  const { profile } = useProfile()
   const { opinions, rating } = useRecipe()
 
   return (
@@ -14,9 +16,11 @@ export default function RecipeOpinionsList() {
             <Opinion {...opinion} />
           </div>
         ))}
-        <div className={styles.bentoElement}>
-          <Opinion isAdd />
-        </div>
+        {profile && (
+          <div className={styles.bentoElement}>
+            <Opinion isAdd />
+          </div>
+        )}
       </div>
     </div>
   )

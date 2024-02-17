@@ -1,5 +1,5 @@
 import styles from './Recipe.module.css'
-import { FETCH_STATUS } from '../../constants/fetchStatus'
+import { FETCH_STATE } from '../../constants/fetchState'
 import RecipeHeader from '../../components/RecipeHeader'
 import RecipeStepsList from '../../components/RecipeStepsList'
 import RecipeIngredientsList from '../../components/RecipeIngredientsList'
@@ -9,11 +9,11 @@ import { useRecipe } from '../../context/RecipeContext'
 export default function Recipe() {
   const { status, error, title } = useRecipe()
 
-  if (status === FETCH_STATUS.LOADING) {
+  if (status === FETCH_STATE.LOADING) {
     return <div>Loading...</div>
   }
 
-  if (status === FETCH_STATUS.ERROR) {
+  if (status === FETCH_STATE.ERROR) {
     return <div>Error: {error}</div>
   }
 

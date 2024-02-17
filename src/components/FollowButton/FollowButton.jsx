@@ -1,14 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { addFollower, removeFollower } from '../../api/user.js'
 import { useProfile } from '../../context/ProfileContext.jsx'
 
 function FollowButton({ userId }) {
   const { profile } = useProfile()
   const [isFollowing, setIsFollowing] = useState(profile.following.includes(userId))
+  const [followCount, setFollowCount] = useState(profile.following.length)
+
+  useEffect(() => {
+    setFollowCount(profile.following.length)
+  }, [profile.following])
 
   const handleFollowClick = async () => {
     try {
       const response = await addFollower(userId)
+      console.log(response)
+
       setIsFollowing(true)
     } catch (error) {
       console.error('Error:', error)

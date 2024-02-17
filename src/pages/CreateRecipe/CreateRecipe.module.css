@@ -1,0 +1,62 @@
+.container {
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--clr-primary);
+  border-radius: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  gap: 10px;
+}
+
+.fieldCheckbox {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  gap: 10px;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  padding: 6px;
+  border: 1.5px solid #bbbbbb;
+  border-radius: 6px;
+}
+
+.field input {
+  background: none;
+  border: none;
+}
+
+.field input:hover {
+  border: none;
+}
+.select {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: 300px;
+}
+
+.select > * {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: 300px;
+}

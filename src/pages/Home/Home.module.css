@@ -1,0 +1,187 @@
+#hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 0px;
+  text-align: center;
+  flex-direction: column;
+  height: 70vh;
+  justify-content: center;
+  color: white;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.867), rgba(0, 0, 0, 0.344)), url('receta.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+}
+
+.boxText {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 40px;
+}
+
+.boxText h1 {
+  color: var(--clr-primary);
+  font-size: 3.8em;
+  padding: 20px;
+}
+
+.boxText span {
+  font-family: helvetica;
+  font-size: 2.2em;
+}
+
+.boxInput {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 40px;
+}
+
+.boxInput p {
+  font-family: helvetica;
+  font-size: 1.8em;
+  padding: 20px;
+}
+
+.boxInput input {
+  border: none;
+  border-radius: 20px;
+  font-size: 1.2em;
+  padding: 10px;
+  width: 400px;
+}
+
+.boxInput button {
+  background-color: rgb(180, 132, 36);
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 1.4em;
+  margin-top: 10px;
+  padding: 10px;
+  width: 400px;
+}
+
+.boxInput button:hover {
+  color: black;
+  background-color: var(--clr-primary);
+}
+
+#contenedor {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.caja {
+  align-items: center;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(180, 132, 36);
+  height: auto;
+  line-height: 1.5em;
+  margin: 30px;
+  margin-top: -60px;
+  margin-bottom: 100px;
+  padding: 80px;
+  width: 500px;
+}
+
+.caja h3 {
+  display: flex;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.caja p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.4em;
+  font-style: italic;
+  margin: 20px;
+  line-height: 1.5em;
+  text-align: justify;
+}
+
+.caja a {
+  font-size: 1.6em;
+  font-weight: bold;
+  padding: 20px;
+  text-decoration: underline;
+}
+
+#contenedorRecetas h2 {
+  color: var(--clr-primary);
+  font-size: 4em;
+  font-weight: bold;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.contenedorGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 100px 200px 200px;
+}
+
+#ventajas {
+  display: flex;
+  align-items: flex-end;
+  padding: 0px 0px;
+  flex-direction: column;
+  height: 800px;
+  justify-content: center;
+  color: white;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.908), rgba(0, 0, 0, 0.556)), url('alimentos.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+}
+
+.ventajasWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ventajasCaja {
+  display: flex;
+  flex-direction: column;
+}
+
+.ventajasCaja h1 {
+  font-size: 3.7em;
+  margin-top: 50px;
+}
+
+.ventajasCaja p {
+  font-size: 1.8em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: italic;
+  margin: 40px;
+  margin-bottom: 50px;
+  width: 900px;
+}
+
+.ventajasCaja button {
+  justify-content: center;
+  font-size: 2em;
+  padding: 5px;
+  width: 800px;
+}
+
+.link {
+  border-radius: 0.5rem;
+  background-color: var(--clr-secondary);
+  padding: 1rem;
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: underline;
+}

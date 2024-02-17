@@ -5,7 +5,7 @@ import {
   updateOpinion as updateOpinionRequest,
   getRecipeById,
 } from '../api/recipe'
-import { FETCH_STATUS } from '../constants/fetchStatus'
+import { FETCH_STATE } from '../constants/fetchState'
 import { useParams } from 'react-router-dom'
 
 export const RecipeContext = createContext(null)
@@ -13,7 +13,7 @@ export const RecipeContext = createContext(null)
 export function RecipeProvider({ children }) {
   const { id } = useParams()
   const [recipe, setRecipe] = useState({})
-  const [status, setStatus] = useState(FETCH_STATUS.LOADING)
+  const [status, setStatus] = useState(FETCH_STATE.LOADING)
   const [error, setError] = useState(null)
 
   const { title, imageUrl, ingredients, difficulty, preparationTime, categories, preparation, opinions, rating } =
@@ -23,10 +23,10 @@ export function RecipeProvider({ children }) {
     getRecipeById(id)
       .then((response) => {
         setRecipe(response.data)
-        setStatus(FETCH_STATUS.SUCCESS)
+        setStatus(FETCH_STATE.SUCCESS)
       })
       .catch((err) => {
-        setStatus(FETCH_STATUS.ERROR)
+        setStatus(FETCH_STATE.ERROR)
         setError(err)
         console.error(err)
       })
