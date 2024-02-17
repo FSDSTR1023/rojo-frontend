@@ -2,12 +2,12 @@ import axios from './axios'
 
 //GET
 
-export const getAllRecipes = (filters) => {
+export const getAllRecipes = (filters = {}) => {
   const { difficulty, preparationTime, categories, minRating, maxRating } = filters
 
   const difficultyFilter = difficulty && `difficulty=${difficulty}`
   const preparationTimeFilter = preparationTime && `preparationTime=${preparationTime}`
-  const categoriesFilter = categories && categories.map((category) => `categories=${category}`)
+  const categoriesFilter = categories ? categories.map((category) => `categories=${category}`) : []
   const minRatingFilter = minRating > 0 && `minRating=${minRating}`
   const maxRatingFilter = maxRating < 5 && `maxRating=${maxRating}`
 
