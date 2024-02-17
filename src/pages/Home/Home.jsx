@@ -4,9 +4,16 @@ import styles from './Home.module.css'
 import { useState, useEffect } from 'react'
 
 export default function Home() {
-  const [recipes, setRecipes] = useState({})
+  const [recipes, setRecipes] = useState([])
+  const [linkRecipes, setLinkRecipes] = useState([])
   useEffect(() => {
-    getAllRecipes().then((response) => setRecipes(response.data))
+    getAllRecipes().then((response) => {
+      const sortedRecipes = response.data.toSorted(() => 0.5 - Math.random())
+      const selectedRecipes = sortedRecipes.slice(0, 8)
+      const linkedRecipes = sortedRecipes.slice(8, 11)
+      setRecipes(selectedRecipes)
+      setLinkRecipes(linkedRecipes)
+    })
   }, [])
 
   return (
@@ -33,7 +40,7 @@ export default function Home() {
               cenas. Recetas más saludables con alto contenido en fibra y bajas en calorías. Gracias a tu alimentación
               conseguirás sentirte bien por dentro y por fuera.
             </p>
-            <a href="">VER RECETAS</a>
+            <a href={`/recipe/${linkRecipes[0]?._id}`}>VER RECETAS</a>
           </div>
           <div className={styles.caja}>
             <h3>Recetas Energéticas</h3>
@@ -42,7 +49,7 @@ export default function Home() {
               día. Desde batidos revitalizantes hasta ensaladas coloridas, encuentra opciones deliciosas que alimentarán
               tanto tu cuerpo como tu paladar.
             </p>
-            <a href="">VER RECETAS</a>
+            <a href={`/recipe/${linkRecipes[1]?._id}`}>VER RECETAS</a>
           </div>
           <div className={styles.caja}>
             <h3>Recetas Variadas</h3>
@@ -51,15 +58,15 @@ export default function Home() {
               vegetarianas y veganas hasta platos con proteínas magras, encuentra inspiración para diversificar tu
               alimentación sin comprometer ni la salud ni el sabor.
             </p>
-            <a href="">VER RECETAS</a>
+            <a href={`/recipe/${linkRecipes[2]?._id}`}>VER RECETAS</a>
           </div>
         </section>
       </div>
       <section id={styles.contenedorRecetas}>
         <h2>ÚLTIMAS RECETAS</h2>
         <div className={styles.contenedorGrid}>
-          {recipes?.length > 0 &&
-            recipes?.slice(0, 8).map((recipe) => (
+          {recipes.length > 0 &&
+            recipes.map((recipe) => (
               <div key={recipe._id} className={styles.item}>
                 <RecipeCard id={recipe._id} recipe={recipe} />
               </div>
@@ -68,8 +75,7 @@ export default function Home() {
       </section>
       <div>
         <section id={styles.ventajas}>
-          {/* <img src={alimentos} alt="" /> */}
-          <div>
+          <div className={styles.ventajasWrapper}>
             <div className={styles.ventajasCaja}>
               <h1>NO TIENES TIEMPO PARA COCINAR?</h1>
               <p>
@@ -77,14 +83,16 @@ export default function Home() {
                 de preparar?
               </p>
             </div>
-          </div>
-          <div className={styles.ventajasCaja}>
-            <h1>NO BUSQUES MÁS!</h1>
-            <p>
-              Aquí encontrarás las mejores recetas saludables llenas de sabor para que puedas dar el giro que deseas a
-              tu alimentación.
-            </p>
-            <button>Regístrate aquí!</button>
+            <div className={styles.ventajasCaja}>
+              <h1>NO BUSQUES MÁS!</h1>
+              <p>
+                Aquí encontrarás las mejores recetas saludables llenas de sabor para que puedas dar el giro que deseas a
+                tu alimentación.
+              </p>
+            </div>
+            <a className={styles.link} href="/register">
+              Regístrate aquí!
+            </a>
           </div>
         </section>
       </div>

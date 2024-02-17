@@ -108,7 +108,6 @@
 }
 
 .caja a {
-  color: var(--clr-primary);
   font-size: 1.6em;
   font-weight: bold;
   padding: 20px;
@@ -127,7 +126,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-  margin: 200px;
+  margin: 100px 200px 200px;
 }
 
 #ventajas {
@@ -143,6 +142,12 @@
   background-size: cover;
   background-position: center center;
   width: 100%;
+}
+
+.ventajasWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .ventajasCaja {
@@ -169,4 +174,14 @@
   font-size: 2em;
   padding: 5px;
   width: 800px;
+}
+
+.link {
+  border-radius: 0.5rem;
+  background-color: var(--clr-secondary);
+  padding: 1rem;
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: underline;
 }

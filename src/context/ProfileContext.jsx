@@ -105,7 +105,8 @@ export const useProfile = () => {
   const context = useContext(ProfileContext)
 
   if (!context) {
-    throw new Error('useProfile has to be inside ProfileProvider')
+    return {}
+    // throw new Error('useProfile has to be inside ProfileProvider')
   }
 
   return context
