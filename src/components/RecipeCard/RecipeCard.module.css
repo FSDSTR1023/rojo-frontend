@@ -12,7 +12,7 @@
 }
 .recipeWrapper:hover {
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
-  transform: translateY(-20px);
+  transform: translateY(-2%);
 }
 
 .recipeContent {
@@ -58,15 +58,30 @@
   border-radius: 0.5rem;
   margin: 1rem 0 0;
   background-color: var(--clr-secondary);
+  transition: all 300ms ease;
 }
-.button:hover {
+.buttonPreparation:hover {
   box-shadow: var(--shadow);
 }
 .recipeTop {
   display: flex;
   flex-direction: row-reverse;
+  position: relative;
 }
 .image {
   height: 150px;
   width: 100%;
+}
+.favoriteButton {
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  width: 40px;
+  transition: all 300ms ease;
+}
+.favoriteButton:hover {
+  box-shadow: none;
+  filter: drop-shadow(0 0 5px rgb(0, 0, 0, 0.4));
 }
