@@ -1,8 +1,9 @@
 import styles from './ProfileCard.module.css'
 import FollowButton from '../FollowButton/FollowButton'
 import { useProfile } from '../../context/ProfileContext'
+import Camera from '../icons/Camera'
 
-export default function ProfileCard({ user }) {
+export default function ProfileCard({ user, editing }) {
   const { profile } = useProfile()
 
   return (
@@ -10,7 +11,14 @@ export default function ProfileCard({ user }) {
       <div className={styles.gradiant}></div>
 
       <div className={styles.profileDown}>
-        <img className={styles.profileImage} src={user.imageUrl} alt="profile-image" />
+        <div className={styles.imageWrapper}>
+          {editing && (
+            <div className={styles.imageCover}>
+              <Camera />
+            </div>
+          )}
+          <img className={styles.profileImage} src={user.imageUrl} alt="profile-image" />
+        </div>
         <div className={styles.profileTitle}>
           {user.lastName}, {user.name}
         </div>

@@ -1,12 +1,10 @@
 import styles from './ProfileData.module.css'
-import { useState } from 'react'
 import FavRecipesWrapper from '../FavRecipes'
 import FormField from '../FormField/FormField'
 import { useProfile } from '../../context/ProfileContext'
 
-export default function ProfileData({ user, getUser, setValue }) {
+export default function ProfileData({ user, getUser, setValue, editing, setEditing }) {
   const { profile, updateUserProfile } = useProfile()
-  const [editing, setEditing] = useState(false)
 
   const handleUpdateUser = () => {
     const update = async () => {
