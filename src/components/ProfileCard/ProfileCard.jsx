@@ -2,9 +2,14 @@ import styles from './ProfileCard.module.css'
 import FollowButton from '../FollowButton/FollowButton'
 import { useProfile } from '../../context/ProfileContext'
 import Camera from '../icons/Camera'
+import { useState } from 'react'
 
-export default function ProfileCard({ user, editing }) {
+export default function ProfileCard({ user, editing, setNewProfileImage }) {
   const { profile } = useProfile()
+
+  const handleFileChange = (e) => {
+    setNewProfileImage(e.target.files[0])
+  }
 
   return (
     <div className={styles.sideBar}>
@@ -13,9 +18,17 @@ export default function ProfileCard({ user, editing }) {
       <div className={styles.profileDown}>
         <div className={styles.imageWrapper}>
           {editing && (
-            <div className={styles.imageCover}>
+            <label htmlFor="imageFile" className={styles.imageCover}>
               <Camera />
-            </div>
+              <input
+                type="file"
+                id="imageFile"
+                name="imageFile"
+                onChange={handleFileChange}
+                accept="image/png, image/jpeg, image/jpg, image/jfif"
+                hidden
+              />
+            </label>
           )}
           <img className={styles.profileImage} src={user.imageUrl} alt="profile-image" />
         </div>
