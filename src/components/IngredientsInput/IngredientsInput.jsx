@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import styles from './IngredientsInput.module.css'
 
 export default function IngredientsInput({ formData, setFormData }) {
   const [initialRender, setInitialRender] = useState(true)
@@ -30,22 +31,40 @@ export default function IngredientsInput({ formData, setFormData }) {
     }))
   }
 
+  const handleRemoveIngredient = (index) => {
+    const updatedIngredients = [...formData.ingredients]
+    updatedIngredients.splice(index, 1)
+    setFormData((prevState) => ({
+      ...prevState,
+      ingredients: updatedIngredients,
+    }))
+  }
+
   return (
-    <>
-      <label htmlFor="ingredients">Ingredients</label>
-      {formData.ingredients.map((ingredient, index) => (
-        <input
-          key={index}
-          type="text"
-          name="ingredients"
-          value={ingredient}
-          onChange={(e) => handleIngredientsChange(e, index)}
-          placeholder={`Ingredient ${index + 1}`}
-        />
-      ))}
+    <div className={styles.field}>
+      <label className={styles.fieldTitle} htmlFor="ingredients">
+        Ingredients
+      </label>
+      <div className={styles.ingredientContainer}>
+        {formData.ingredients.map((ingredient, index) => (
+          <div key={index} className={styles.ingredient}>
+            <input
+              key={index}
+              type="text"
+              name="ingredients"
+              value={ingredient}
+              onChange={(e) => handleIngredientsChange(e, index)}
+              placeholder={`Ingredient ${index + 1}`}
+            />
+            <button type="button" onClick={() => handleRemoveIngredient(index)}>
+              x
+            </button>
+          </div>
+        ))}
+      </div>
       <button type="button" onClick={handleAddIngredient}>
         Add Ingredient
       </button>
-    </>
+    </div>
   )
 }

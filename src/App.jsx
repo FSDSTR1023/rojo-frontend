@@ -10,6 +10,7 @@ import Recipe from './pages/Recipe'
 import { ProfileProvider } from './context/ProfileContext'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import CreateRecipe from './pages/CreateRecipe/CreateRecipe'
+import EditRecipe from './pages/CreateRecipe/EditRecipe'
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
                 }
               />
               <Route path="/recipe/create" element={<CreateRecipe />} />
+              <Route path="/recipe/edit/:id" element={<EditRecipe />} />
             </Route>
           </Route>
         </Routes>

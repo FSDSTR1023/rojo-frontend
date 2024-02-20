@@ -1,18 +1,17 @@
-import { useState } from 'react'
-import { createRecipe } from '../../api/recipe'
+import { useState, useEffect } from 'react'
 import styles from './CreateRecipe.module.css'
+import FormField from '../../components/FormField/FormField'
 import ImageInput from '../../components/ImageInput'
 import RecipeStepsInput from '../../components/RecipeStepsInput'
 import Select from 'react-select'
 import CategoriesInput from '../../components/CategoriesInput'
 import IngredientsInput from '../../components/IngredientsInput/IngredientsInput'
 import { difficulty, preparationTime } from '../../api/constants'
-import { useProfile } from '../../context/ProfileContext'
-import { prepareImageData, uploadImageToCloudinary } from '../../api/cloudinary'
-import { useNavigate } from 'react-router-dom'
+import { getRecipeById, updateRecipe } from '../../api/recipe'
+import { useParams } from 'react-router-dom'
 
-export default function CreateRecipe() {
-  const { profile } = useProfile()
+export default function EditRecipe() {
+  const { id } = useParams()
   const [formData, setFormData] = useState({
     title: '',
     ingredients: [],
@@ -21,24 +20,34 @@ export default function CreateRecipe() {
     difficulty: '',
     preparationTime: '',
     imageUrl: '',
-    author: profile ? profile._id : '',
   })
 
-  const navigate = useNavigate()
+  useEffect(() => {
+    async function fetchRecipe() {
+      try {
+        const response = await getRecipeById(id)
+        setFormData(response.data)
+      } catch (error) {
+        console.error('Error al cargar la receta: ', error)
+      }
+    }
+    fetchRecipe()
+  }, [id])
+
+  console.log(formData)
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData((prevState) => ({
-      ...prevState,
+    setFormData((prevRecipe) => ({
+      ...prevRecipe,
       [name]: value,
     }))
   }
 
   const handleChangeSelect = (selectedOption, { name }) => {
     const selectedValue = selectedOption.value
-
-    setFormData((prevState) => ({
-      ...prevState,
+    setFormData((prevRecipe) => ({
+      ...prevRecipe,
       [name]: selectedValue,
     }))
   }
@@ -46,42 +55,18 @@ export default function CreateRecipe() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const imageData = prepareImageData(formData.imageFile)
-      const imageUrl = await uploadImageToCloudinary(imageData)
-
-      setFormData((prevState) => ({
-        ...prevState,
-        imageUrl: imageUrl,
-      }))
-      const recipe = await createRecipe({
-        ...formData,
-        imageUrl: imageUrl,
-      })
-      const recipeId = recipe.data._id
-      navigate(`/recipe/${recipeId}`)
+      await updateRecipe(recipe)
     } catch (error) {
-      console.error('Error al crear la receta: ', error)
+      console.error('Error al editar la receta: ', error)
     }
   }
 
   return (
     <div className={styles.container}>
-      <h4>Create new recipe</h4>
+      <h4>Edit recipe</h4>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.field}>
-          <label htmlFor="title">Title</label>
-          <input
-            className={styles.input}
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            placeholder="Add title..."
-          ></input>
-        </div>
-        <div className={styles.field}>
-          <IngredientsInput {...{ formData, setFormData }} />
-        </div>
+        <FormField label="Title" value={formData.title} setValue={(value) => setValue('title', value)} />
+        <IngredientsInput {...{ formData, setFormData }} />
         <RecipeStepsInput {...{ formData, setFormData }} />
         <CategoriesInput {...{ formData, setFormData }} />
         <div className={styles.field}>
@@ -95,7 +80,7 @@ export default function CreateRecipe() {
         <div className={styles.field}>
           <ImageInput handleChange={handleChange} />
         </div>
-        <button type="submit">Publish Recipe</button>
+        <button type="submit">Edit Recipe</button>
       </form>
     </div>
   )
