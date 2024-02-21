@@ -3,37 +3,39 @@ import io from 'socket.io-client'
 import styles from './Chat.module.css'
 import IconPerson from '../IconPerson'
 import ChatIcon from '../ChatIcon'
+import { useProfile } from '../../context/ProfileContext'
 
 export default function Chat() {
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
   const [chatOpen, setChatOpen] = useState(false)
+  const { profile } = useProfile()
 
   const socket = io('http://localhost:3000')
 
   useEffect(() => {
     socket.on('message', receiveMessage)
 
+    socket.emit('userConnection', profile._id)
+
     return () => {
       socket.off('message', receiveMessage)
+      socket.emit('userDisconnect', profile._id)
     }
   }, [])
 
   const receiveMessage = (message) => {
-    if (message.from !== 'Me') {
-      setMessages((state) => [...state, message])
-    }
+    setMessages((state) => [...state, message])
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const newMessage = {
       body: message,
-      from: 'Me',
+      from: profile.userName,
     }
-    //setMessages((state) => [newMessage, ...state])
     setMessage('')
-    socket.emit('message', newMessage.body)
+    socket.emit('message', newMessage)
   }
 
   const toggleChatOpen = () => {
