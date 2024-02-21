@@ -3,6 +3,7 @@ import { FETCH_STATE } from '../../constants/fetchState'
 import useUsers from '../../hooks/useUsers'
 import { Link } from 'react-router-dom'
 import FollowButton from '../../components/FollowButton/FollowButton'
+import Chat from '../../components/Chat/Chat'
 
 export default function Users() {
   const { users, state, error } = useUsers()
@@ -29,6 +30,7 @@ export default function Users() {
           <FollowButton userId={id} />
         </div>
       ))}
+      <Chat />
     </div>
   )
 }
