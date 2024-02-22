@@ -2,13 +2,14 @@ import styles from './ProfileCard.module.css'
 import FollowButton from '../FollowButton/FollowButton'
 import { useProfile } from '../../context/ProfileContext'
 import Camera from '../icons/Camera'
-import { useState } from 'react'
 
-export default function ProfileCard({ user, editing, setNewProfileImage }) {
+export default function ProfileCard({ user, editing, newProfileImage, setNewProfileImage }) {
   const { profile } = useProfile()
 
   const handleFileChange = (e) => {
-    setNewProfileImage(e.target.files[0])
+    if (e.target.files && e.target.files[0]) {
+      setNewProfileImage(e.target.files[0])
+    }
   }
 
   return (
@@ -30,7 +31,11 @@ export default function ProfileCard({ user, editing, setNewProfileImage }) {
               />
             </label>
           )}
-          <img className={styles.profileImage} src={user.imageUrl} alt="profile-image" />
+          <img
+            className={styles.profileImage}
+            src={newProfileImage ? URL.createObjectURL(newProfileImage) : user.imageUrl}
+            alt="profile-image"
+          />
         </div>
         <div className={styles.profileTitle}>
           {user.lastName}, {user.name}
