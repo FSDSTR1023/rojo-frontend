@@ -3,7 +3,7 @@ import { getUserById, updateUser as updateUserRequest } from '../api/user'
 import { FETCH_STATE } from '../constants/fetchState'
 
 export default function useUser(id) {
-  const [user, setUser] = useState([])
+  const [user, setUser] = useState({})
   const [state, setState] = useState(FETCH_STATE.LOADING)
   const [error, setError] = useState(null)
 
