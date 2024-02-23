@@ -9,6 +9,7 @@ export default function Chat() {
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
   const [chatOpen, setChatOpen] = useState(false)
+  const [userConnectedMessage, setUserConnectedMessage] = useState('')
   const { profile } = useProfile()
 
   const socket = io('http://localhost:3000')
@@ -16,11 +17,19 @@ export default function Chat() {
   useEffect(() => {
     socket.on('message', receiveMessage)
 
-    socket.emit('userConnection', profile._id)
+    socket.emit('userConnection', profile._id, profile.userName)
+
+    socket.on('userConnectionMsg', (userName) => {
+      setUserConnectedMessage(`${userName} is connected`)
+    })
+
+    socket.on('userDisconnectMsg', (userName) => {
+      setUserConnectedMessage(`${userName} is disconnected`)
+    })
 
     return () => {
       socket.off('message', receiveMessage)
-      socket.emit('userDisconnect', profile._id)
+      socket.emit('userDisconnect', profile._id, profile.userName)
     }
   }, [])
 
@@ -55,6 +64,7 @@ export default function Chat() {
           </div>
           <div className={styles.messageContainer}>
             <ul>
+              {userConnectedMessage && <li>{userConnectedMessage}</li>}
               {messages.map((message, i) => (
                 <li key={i}>
                   {message.from}: {message.body}

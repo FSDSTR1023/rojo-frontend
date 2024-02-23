@@ -1,8 +1,24 @@
 .page {
   display: flex;
+  flex-direction: row;
+  min-height: 90vh;
+}
+
+.loginContainer {
+  display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 3rem;
+  width: 60%;
+}
+
+.imgContainer {
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.867), rgba(0, 0, 0, 0.344)), url('alimentos.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width: 40%;
 }
 
 .title {
