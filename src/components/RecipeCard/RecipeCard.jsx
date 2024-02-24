@@ -33,10 +33,8 @@ const RecipeCard = ({ recipe }) => {
         <img className={styles.image} src={recipe.imageUrl} alt="recipe-image" />
       </div>
       <div className={styles.recipeContent}>
-        <div>
-          <h3 className={styles.title}>{recipe.title}</h3>
-          <p className={styles.ingredients}>Ingredients: {formattedIngredients}</p>
-        </div>
+        <h3 className={styles.title}>{recipe.title}</h3>
+        <p className={styles.ingredients}>Ingredients: {formattedIngredients}</p>
         <div className={styles.footer}>
           <div className={styles.difficulty}>
             <p>{recipe.difficulty}</p>
