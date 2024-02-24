@@ -10,7 +10,7 @@ export default function ProfileCard({ user }) {
       <div className={styles.gradiant}></div>
 
       <div className={styles.profileDown}>
-        <img className={styles.profileImage} src={user.imageUrl} alt="profile-image" />
+        <img className={styles.profileImage} src={user.imageUrl ?? `/cooker.webp`} alt="profile-image" />
         <div className={styles.profileTitle}>
           {user.lastName}, {user.name}
         </div>
