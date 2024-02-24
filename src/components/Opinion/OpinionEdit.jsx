@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styles from './Opinion.module.css'
-import Star from '../Star'
+import Star from '../icons/Star'
 import { useRecipe } from '../../context/RecipeContext'
 
 export default function OpinionEdit({ initialText = '', initialRating = 3, opinionId, setIsEdit }) {
