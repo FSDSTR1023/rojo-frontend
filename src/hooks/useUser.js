@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getUserById, updateUser as updateUserRequest } from '../api/user'
+import { getUserById } from '../api/user'
 import { FETCH_STATE } from '../constants/fetchState'
 
 export default function useUser(id) {

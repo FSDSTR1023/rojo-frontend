@@ -4,12 +4,13 @@ import { useProfile } from '../../context/ProfileContext.jsx'
 
 function FollowButton({ userId }) {
   const { profile } = useProfile()
-  const [isFollowing, setIsFollowing] = useState(profile.following.includes(userId))
-  const [followCount, setFollowCount] = useState(profile.following.length)
+  const [isFollowing, setIsFollowing] = useState(false)
+  const [followCount, setFollowCount] = useState(0)
 
   useEffect(() => {
-    setFollowCount(profile.following.length)
-  }, [profile.following])
+    setFollowCount(profile?.following.length)
+    setIsFollowing(profile?.following.includes(userId))
+  }, [profile?.following])
 
   const handleFollowClick = async () => {
     try {

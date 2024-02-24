@@ -29,7 +29,7 @@ export default function ProfileCard({ user }) {
             <span>{user.following?.length}</span>
           </div>
         </div>
-        {user._id !== profile._id && <FollowButton userId={user._id} />}
+        {user._id !== profile?._id && <FollowButton userId={user._id} />}
       </div>
     </div>
   )
