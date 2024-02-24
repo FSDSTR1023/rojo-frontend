@@ -135,6 +135,7 @@ table {
   --clr-light: ghostwhite;
   --clr-primary: rgb(163, 220, 173);
   --clr-secondary: orange;
+  --clr-secondary-dark: rgb(255, 115, 0);
   --clr-shadow: rgba(0, 0, 0, 0.2);
 
   --shadow: 0 0 10px 2px var(--clr-shadow);
@@ -174,6 +175,7 @@ button {
   border-radius: 0.5rem;
   background-color: var(--clr-secondary);
   cursor: pointer;
+  transition: box-shadow 0.3s ease;
 }
 button:hover {
   box-shadow: var(--shadow);
