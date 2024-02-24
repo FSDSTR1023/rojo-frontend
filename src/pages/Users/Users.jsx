@@ -22,11 +22,10 @@ export default function Users() {
           <div>
             <h3 className={styles.userName}>{userName}</h3>
             <Link to={`/profile/${id}`}>
-              <img className={styles.image} src={imageUrl} alt={`${userName}'s profile image`} />
+              <img className={styles.image} src={imageUrl ?? `/cooker.webp`} alt={`${userName}'s profile image`} />
             </Link>
             <p className={styles.country}>{country}</p>
             <p className={styles.description}>{description}</p>
-
             <FollowButton userId={id} />
           </div>
         </div>

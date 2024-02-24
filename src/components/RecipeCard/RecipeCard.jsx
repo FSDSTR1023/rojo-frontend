@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useProfile } from '../../context/ProfileContext'
 import styles from './RecipeCard.module.css'
 import { Link } from 'react-router-dom'
-import Heart from '../Heart'
+import Heart from '../icons/Heart'
 
 const RecipeCard = ({ recipe }) => {
   const formattedIngredients = recipe.ingredients.slice(0, -1).join(', ') + ', ' + recipe.ingredients.slice(-1)[0] + '.'
@@ -33,10 +33,8 @@ const RecipeCard = ({ recipe }) => {
         <img className={styles.image} src={recipe.imageUrl} alt="recipe-image" />
       </div>
       <div className={styles.recipeContent}>
-        <div>
-          <h3 className={styles.title}>{recipe.title}</h3>
-          <p className={styles.ingredients}>Ingredients: {formattedIngredients}</p>
-        </div>
+        <h3 className={styles.title}>{recipe.title}</h3>
+        <p className={styles.ingredients}>Ingredients: {formattedIngredients}</p>
         <div className={styles.footer}>
           <div className={styles.difficulty}>
             <p>{recipe.difficulty}</p>

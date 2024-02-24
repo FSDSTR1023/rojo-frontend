@@ -8,20 +8,27 @@ import {
   getUserById,
   updateUser,
 } from '../api/user'
+import { FETCH_STATE } from '../constants/fetchState'
 
 export const ProfileContext = createContext()
 
 export const ProfileProvider = ({ children }) => {
   const [profile, setProfile] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [state, setState] = useState(FETCH_STATE.LOADING)
+  const [error, setError] = useState(null)
 
   const getProfile = () => {
+    setState(FETCH_STATE.LOADING)
     checkAuthToken()
       .then((user) => {
         setProfile(user.data)
         setIsAuthenticated(true)
+        setState(FETCH_STATE.SUCCESS)
       })
       .catch((err) => {
+        setError(err)
+        setState(FETCH_STATE.ERROR)
         console.log(err)
       })
   }
@@ -88,6 +95,8 @@ export const ProfileProvider = ({ children }) => {
     <ProfileContext.Provider
       value={{
         profile,
+        state,
+        error,
         isAuthenticated,
         login,
         logout,

@@ -44,7 +44,7 @@ export default function ProfileData({
         <div className={styles.header}>
           <h4>Profile information</h4>
           <div className={styles.buttonContainer}>
-            {profile._id === user._id &&
+            {profile?._id === user._id &&
               (editing ? (
                 <>
                   <button className={styles.updateButton} onClick={handleUpdateUser}>

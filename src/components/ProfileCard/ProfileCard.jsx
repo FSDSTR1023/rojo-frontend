@@ -33,7 +33,7 @@ export default function ProfileCard({ user, editing, newProfileImage, setNewProf
           )}
           <img
             className={styles.profileImage}
-            src={newProfileImage ? URL.createObjectURL(newProfileImage) : user.imageUrl}
+            src={newProfileImage ? URL.createObjectURL(newProfileImage) : (user.imageUrl ?? `/cooker.webp`)}
             alt="profile-image"
           />
         </div>
@@ -55,7 +55,7 @@ export default function ProfileCard({ user, editing, newProfileImage, setNewProf
             <span>{user.following?.length}</span>
           </div>
         </div>
-        {user._id !== profile._id && <FollowButton userId={user._id} />}
+        {user._id !== profile?._id && <FollowButton userId={user._id} />}
       </div>
     </div>
   )

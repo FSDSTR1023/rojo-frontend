@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react'
+import styles from './FollowButton.module.css'
 import { addFollower, removeFollower } from '../../api/user.js'
 import { useProfile } from '../../context/ProfileContext.jsx'
 
 function FollowButton({ userId }) {
   const { profile } = useProfile()
-  const [isFollowing, setIsFollowing] = useState(profile.following.includes(userId))
-  const [followCount, setFollowCount] = useState(profile.following.length)
+  const [isFollowing, setIsFollowing] = useState(false)
+  const [followCount, setFollowCount] = useState(0)
 
   useEffect(() => {
-    setFollowCount(profile.following.length)
-  }, [profile.following])
+    setFollowCount(profile?.following.length)
+    setIsFollowing(profile?.following.includes(userId))
+  }, [profile?.following])
 
   const handleFollowClick = async () => {
     try {
-      const response = await addFollower(userId)
-      console.log(response)
-
+      await addFollower(userId)
       setIsFollowing(true)
     } catch (error) {
       console.error('Error:', error)
@@ -24,8 +24,7 @@ function FollowButton({ userId }) {
 
   const handleUnfollowClick = async () => {
     try {
-      const response = await removeFollower(userId)
-
+      removeFollower(userId)
       setIsFollowing(false)
     } catch (error) {
       console.error('Error:', error)
@@ -34,7 +33,11 @@ function FollowButton({ userId }) {
 
   return (
     <>
-      <button onClick={isFollowing ? handleUnfollowClick : handleFollowClick}>
+      <button
+        onClick={isFollowing ? handleUnfollowClick : handleFollowClick}
+        className={styles.followButton}
+        data-state={isFollowing}
+      >
         {isFollowing ? 'Unfollow' : 'Follow'}
       </button>
     </>
