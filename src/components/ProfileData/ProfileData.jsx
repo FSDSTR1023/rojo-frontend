@@ -1,24 +1,41 @@
 import styles from './ProfileData.module.css'
-import { useState } from 'react'
 import FavRecipesWrapper from '../FavRecipes'
 import FormField from '../FormField/FormField'
 import { useProfile } from '../../context/ProfileContext'
+import { prepareImageData, uploadImageToCloudinary } from '../../api/cloudinary'
 
-export default function ProfileData({ user, getUser, setValue }) {
+export default function ProfileData({
+  user,
+  getUser,
+  setValue,
+  editing,
+  setEditing,
+  newProfileImage,
+  setNewProfileImage,
+}) {
   const { profile, updateUserProfile } = useProfile()
-  const [editing, setEditing] = useState(false)
 
   const handleUpdateUser = () => {
     const update = async () => {
-      await updateUserProfile(user)
-      await getUser()
-      setEditing(false)
+      try {
+        const imageData = prepareImageData(newProfileImage)
+        const imageUrl = await uploadImageToCloudinary(imageData)
+
+        await updateUserProfile({ ...user, imageUrl })
+        await getUser()
+        setEditing(false)
+      } catch (err) {
+        console.error('Error updating profile: ' + err)
+      }
     }
     update()
   }
 
   const handleCancel = () => {
-    getUser().then(() => setEditing(false))
+    getUser().then(() => {
+      setEditing(false)
+      setNewProfileImage(null)
+    })
   }
 
   return (

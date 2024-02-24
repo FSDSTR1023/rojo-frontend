@@ -25,8 +25,8 @@ export default function Users() {
           </Link>
           <p className={styles.country}>{country}</p>
           <p className={styles.description}>{description}</p>
-
-          <FollowButton userId={id} />
+            <FollowButton userId={id} />
+          </div>
         </div>
       ))}
     </div>
