@@ -11,6 +11,7 @@ import { ProfileProvider } from './context/ProfileContext'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import Home from './pages/Home'
 import CreateRecipe from './pages/CreateRecipe/CreateRecipe'
+import Footer from './components/Footer'
 
 function App() {
   return (
