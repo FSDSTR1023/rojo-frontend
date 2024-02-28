@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import styles from './Layout.module.css'
 import { Link } from 'react-router-dom'
 import { useProfile } from '../../context/ProfileContext'
+import Footer from '../Footer/Footer'
 
 export default function Layout() {
   const { profile, logout, isAuthenticated } = useProfile()
@@ -47,6 +48,10 @@ export default function Layout() {
       <main className={styles.main}>
         <Outlet />
       </main>
+
+      <div>
+        <Footer />
+      </div>
     </>
   )
 }

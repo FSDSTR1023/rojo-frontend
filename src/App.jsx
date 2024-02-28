@@ -11,7 +11,7 @@ import { ProfileProvider } from './context/ProfileContext'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import Home from './pages/Home'
 import CreateRecipe from './pages/CreateRecipe/CreateRecipe'
-import Footer from './components/Footer'
+import Footer from './components/Footer/Footer'
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
                 </RecipeProvider>
               }
             />
+            <Route element={<Footer />} />
 
             <Route element={<ProtectedRoutes />}>
               <Route path="/explore" element={<Explore />} />
