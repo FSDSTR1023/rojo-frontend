@@ -9,6 +9,8 @@
   transition: all 400ms ease;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
+  justify-content: space-between;
 }
 .recipeWrapper:hover {
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
@@ -71,6 +73,8 @@
 .image {
   height: 150px;
   width: 100%;
+  object-fit: cover;
+  border-radius: 6px 6px 0 0;
 }
 .favoriteButton {
   background-color: transparent;
