@@ -1,9 +1,71 @@
-.footer {
-  background-color: var(--clr-primary);
-  margin-top: 5rem;
-  padding: 5rem 0;
+.contenedorArriba {
+  background-color: rgb(180, 132, 36);
+  display: flex;
+  flex-direction: row;
+  height: 150px;
+  justify-content: space-between;
+  padding: 5rem;
 }
 
-.containerFacebook {
-  background-image: url('facebook.png');
+.logosRrss {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-left: 10rem;
+}
+
+.logosRrss p {
+  font-size: 2.5em;
+  font-weight: 500;
+}
+
+.icons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.descargaApp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 800px;
+}
+
+.descargaApp p {
+  font-size: 2.5em;
+  font-weight: 500;
+}
+
+.linkDescarga {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.linkDescarga > img {
+  width: 15rem;
+}
+.contenedorAbajo {
+  background-color: var(--clr-primary);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1.2em;
+  font-weight: bold;
+  height: 15px;
+  padding: 2rem 5rem;
+}
+
+.contenedorAbajo p {
+  align-items: center;
+  display: flex;
+  font-size: 1.2em;
+  margin-left: 2rem;
+}
+
+.links {
+  display: flex;
+  gap: 3rem;
 }
