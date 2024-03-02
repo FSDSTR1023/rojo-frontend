@@ -1,9 +1,13 @@
 import styles from './RecipeCardRow.module.css'
 import RecipeCard from '../RecipeCard'
 import useSnapScroll from '../../hooks/useSnapScroll'
+import CaretLeft from '../icons/CaretLeft'
+import CaretRight from '../icons/CaretRight'
 
 export default function RecipeCardRow({ category, categoryRecipes }) {
-  const { ref, scroll } = useSnapScroll()
+  const { ref, scroll, limits } = useSnapScroll()
+
+  console.log('render')
 
   return (
     <div className={styles.categoriesWrapper}>
@@ -13,12 +17,16 @@ export default function RecipeCardRow({ category, categoryRecipes }) {
           <RecipeCard recipe={recipe} key={`${category}-${recipe._id}`} />
         ))}
       </div>
-      <button className={styles.scrollLeft} onClick={() => scroll(-1)}>
-        -
-      </button>
-      <button className={styles.scrollRight} onClick={() => scroll(+1)}>
-        +
-      </button>
+      {!limits.left && (
+        <button className={styles.scrollLeft} onClick={() => scroll(-1)}>
+          <CaretLeft />
+        </button>
+      )}
+      {!limits.right && (
+        <button className={styles.scrollRight} onClick={() => scroll(+1)}>
+          <CaretRight />
+        </button>
+      )}
     </div>
   )
 }

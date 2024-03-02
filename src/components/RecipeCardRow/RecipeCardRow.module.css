@@ -17,6 +17,7 @@
   position: absolute;
   top: 50%;
   padding: 1rem;
+  border-radius: 50%;
 }
 
 .scrollRight {
