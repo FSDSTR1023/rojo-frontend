@@ -22,14 +22,12 @@
 }
 
 .messageContainer {
-  padding: 1rem;
-  height: 13rem;
-}
-
-.messageContainer {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  padding: 1rem;
+  height: 13rem;
+  overflow-y: scroll;
 }
 .header {
   display: flex;
