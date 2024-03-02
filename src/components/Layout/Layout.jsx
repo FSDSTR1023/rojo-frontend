@@ -3,6 +3,7 @@ import styles from './Layout.module.css'
 import NavBar from '../NavBar'
 import { useProfile } from '../../context/ProfileContext'
 import BackArrow from '../icons/BackArrow'
+import TopArrow from '../icons/TopArrow'
 
 export default function Layout() {
   const { isAuthenticated } = useProfile()
@@ -20,7 +21,10 @@ export default function Layout() {
         </Link>
       )}
 
-      <Link className={styles.backButton} to={-1}>
+      <button className={styles.navButtonTop} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <TopArrow />
+      </button>
+      <Link className={styles.navButtonBack} to={-1}>
         <BackArrow />
       </Link>
     </>
