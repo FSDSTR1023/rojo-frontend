@@ -30,13 +30,13 @@ export default function useSnapScroll(speed = 5) {
 
     const scrollValue = parseInt(cardWidth) + 2 * parseInt(cardMargin)
     scrollSP += (scrollValue * sign) / Math.abs(sign)
-    if (scrollSP < 0) {
+    if (scrollSP <= 0) {
       scrollSP = 0
       setLimits({
         left: true,
         right: false,
       })
-    } else if (scrollSP > maxScroll) {
+    } else if (scrollSP >= maxScroll) {
       scrollSP = maxScroll
       setLimits({
         left: false,
