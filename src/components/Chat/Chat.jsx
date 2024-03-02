@@ -65,10 +65,10 @@ export default function Chat() {
   return (
     <>
       <button onClick={toggleChatOpen} className={styles.chatButton}>
-        <ChatIcon />
+        <ChatIcon className={styles.chatIcon} />
       </button>
       {chatOpen && (
-        <div className={styles.chatContainer}>
+        <aside className={styles.chatContainer}>
           <div className={styles.header}>
             <IconPerson />
             <p>Chat with your friends!</p>
@@ -94,7 +94,7 @@ export default function Chat() {
             />
             <button type="submit">Send</button>
           </form>
-        </div>
+        </aside>
       )}
     </>
   )

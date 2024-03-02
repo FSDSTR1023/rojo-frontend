@@ -7,8 +7,8 @@
   flex-direction: column;
   position: fixed;
   z-index: 999;
-  bottom: 4rem;
-  right: 5.5rem;
+  bottom: 120px;
+  right: 100px;
   box-shadow: var(--shadow);
 }
 
@@ -41,11 +41,26 @@
 .chatButton {
   font-weight: 700;
   position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  padding: 1rem;
+  bottom: 100px;
+  right: 20px;
+  padding: 2rem;
   text-align: center;
   border-radius: 100%;
-  z-index: 999;
+  background-color: var(--clr-primary);
+  z-index: 998;
   font-size: x-large;
+  height: 24px;
+  width: 24px;
+  box-shadow: var(--shadow);
+  transition: scale 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chatButton:hover {
+  scale: 110%;
+}
+.chatIcon {
+  position: fixed;
+  z-index: 999;
 }
