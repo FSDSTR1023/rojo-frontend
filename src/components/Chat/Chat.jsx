@@ -12,7 +12,7 @@ export default function Chat() {
   const [userConnectedMessage, setUserConnectedMessage] = useState([])
   const { profile } = useProfile()
 
-  const socket = io('http://localhost:3000')
+  const socket = io('http://localhost:4000')
 
   useEffect(() => {
     socket.on('message', receiveMessage)
