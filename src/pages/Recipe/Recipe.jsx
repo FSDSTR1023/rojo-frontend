@@ -6,6 +6,7 @@ import RecipeIngredientsList from '../../components/RecipeIngredientsList'
 import RecipeOpinionsList from '../../components/RecipeOpinionsList'
 import { useRecipe } from '../../context/RecipeContext'
 import { Link, useParams } from 'react-router-dom'
+import EditIcon from '../../components/EditIcon'
 
 export default function Recipe() {
   const { status, error, title } = useRecipe()
@@ -22,9 +23,12 @@ export default function Recipe() {
   return (
     <div>
       <RecipeHeader />
-
-      <h2 className={styles.title}>{title}</h2>
-      <Link to={`/recipe/edit/${id}`}>Edit Recipe</Link>
+      <div className={styles.titleContainer}>
+        <h2 className={styles.title}>{title}</h2>
+        <Link to={`/recipe/edit/${id}`}>
+          <EditIcon className={styles.editIcon} />
+        </Link>
+      </div>
 
       <div className={styles.contentWrapper}>
         <RecipeStepsList />
