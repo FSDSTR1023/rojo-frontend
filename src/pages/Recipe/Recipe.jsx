@@ -6,7 +6,7 @@ import RecipeIngredientsList from '../../components/RecipeIngredientsList'
 import RecipeOpinionsList from '../../components/RecipeOpinionsList'
 import { useRecipe } from '../../context/RecipeContext'
 import { Link, useParams } from 'react-router-dom'
-import EditIcon from '../../components/EditIcon'
+import EditIcon from './EditIcon'
 
 export default function Recipe() {
   const { status, error, title } = useRecipe()
