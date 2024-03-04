@@ -18,10 +18,14 @@ export default function ProfileData({
   const handleUpdateUser = () => {
     const update = async () => {
       try {
-        const imageData = prepareImageData(newProfileImage)
-        const imageUrl = await uploadImageToCloudinary(imageData)
+        if (newProfileImage) {
+          const imageData = prepareImageData(newProfileImage)
+          const imageUrl = await uploadImageToCloudinary(imageData)
+          await updateUserProfile({ ...user, imageUrl })
+        } else {
+          await updateUserProfile(user)
+        }
 
-        await updateUserProfile({ ...user, imageUrl })
         await getUser()
         setEditing(false)
       } catch (err) {
