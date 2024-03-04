@@ -7,8 +7,6 @@ import CaretRight from '../icons/CaretRight'
 export default function RecipeCardRow({ category, categoryRecipes }) {
   const { ref, scroll, limits } = useSnapScroll()
 
-  console.log('render')
-
   return (
     <div className={styles.categoriesWrapper}>
       <h2 className={styles.categoriesTitle}>{category}</h2>
