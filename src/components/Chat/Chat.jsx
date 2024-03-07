@@ -9,10 +9,10 @@ export default function Chat() {
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
   const [chatOpen, setChatOpen] = useState(false)
-  const [userConnectedMessage, setUserConnectedMessage] = useState('')
+  const [userConnectedMessage, setUserConnectedMessage] = useState([])
   const { profile } = useProfile()
 
-  const socket = io('http://localhost:3000')
+  const socket = io('http://localhost:4000')
 
   useEffect(() => {
     socket.on('message', receiveMessage)
@@ -20,11 +20,22 @@ export default function Chat() {
     socket.emit('userConnection', profile._id, profile.userName)
 
     socket.on('userConnectionMsg', (userName) => {
-      setUserConnectedMessage(`${userName} is connected`)
+      setUserConnectedMessage((prevMessages) => {
+        if (!prevMessages.includes(`${userName} is connected`)) {
+          return [...prevMessages, `${userName} is connected`]
+        }
+        return prevMessages
+      })
     })
 
     socket.on('userDisconnectMsg', (userName) => {
-      setUserConnectedMessage(`${userName} is disconnected`)
+      setUserConnectedMessage((prevMessages) => {
+        if (!prevMessages.includes(`${userName} is disconnected`)) {
+          // Agregar el mensaje solo si no está presente en la lista
+          return [...prevMessages, `${userName} is disconnected`]
+        }
+        return prevMessages
+      })
     })
 
     return () => {
@@ -54,17 +65,19 @@ export default function Chat() {
   return (
     <>
       <button onClick={toggleChatOpen} className={styles.chatButton}>
-        <ChatIcon />
+        <ChatIcon className={styles.chatIcon} />
       </button>
       {chatOpen && (
-        <div className={styles.chatContainer}>
+        <aside className={styles.chatContainer}>
           <div className={styles.header}>
             <IconPerson />
             <p>Chat with your friends!</p>
           </div>
           <div className={styles.messageContainer}>
             <ul>
-              {userConnectedMessage && <li>{userConnectedMessage}</li>}
+              {userConnectedMessage.map((message, i) => (
+                <li key={i}>{message}</li>
+              ))}
               {messages.map((message, i) => (
                 <li key={i}>
                   {message.from}: {message.body}
@@ -81,7 +94,7 @@ export default function Chat() {
             />
             <button type="submit">Send</button>
           </form>
-        </div>
+        </aside>
       )}
     </>
   )

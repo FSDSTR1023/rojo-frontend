@@ -27,7 +27,8 @@
   scale: 110%;
 }
 
-.backButton {
+.navButtonBack,
+.navButtonTop {
   font-weight: 700;
   position: fixed;
   bottom: 20px;
@@ -41,12 +42,22 @@
   box-shadow: var(--shadow);
   transition: scale 0.3s ease;
 }
-.backButton:hover {
+.navButtonBack:hover,
+.navButtonTop:hover {
   scale: 110%;
 }
-.backButton > * {
+.navButtonBack > *,
+.navButtonTop > * {
   height: 24px;
   width: 24px;
   position: absolute;
   transform: translate(-50%, -50%);
+}
+.navButtonTop {
+  bottom: 100px;
+  left: 20px;
+}
+.navButtonBack {
+  bottom: 20px;
+  left: 20px;
 }

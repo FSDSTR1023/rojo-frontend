@@ -4,6 +4,8 @@ import NavBar from '../NavBar'
 import { useProfile } from '../../context/ProfileContext'
 import Footer from '../Footer/Footer'
 import BackArrow from '../icons/BackArrow'
+import TopArrow from '../icons/TopArrow'
+import Chat from '../Chat/Chat'
 
 export default function Layout() {
   const { isAuthenticated } = useProfile()
@@ -14,14 +16,19 @@ export default function Layout() {
       <main className={styles.main}>
         <Outlet />
       </main>
- 
+
+      {isAuthenticated && <Chat />}
+
       {isAuthenticated && (
         <Link className={styles.createButton} to="/recipe/create">
           +
         </Link>
       )}
 
-      <Link className={styles.backButton} to={-1}>
+      <button className={styles.navButtonTop} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <TopArrow />
+      </button>
+      <Link className={styles.navButtonBack} to={-1}>
         <BackArrow />
       </Link>
 

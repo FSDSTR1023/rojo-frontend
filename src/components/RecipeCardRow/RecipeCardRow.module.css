@@ -1,6 +1,7 @@
 .categoriesWrapper {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .categoriesTitle {
   font-size: 24px;
@@ -8,4 +9,17 @@
 }
 .categoriesCards {
   display: flex;
+  overflow-x: hidden;
+}
+
+.scrollLeft,
+.scrollRight {
+  position: absolute;
+  top: 50%;
+  padding: 1rem;
+  border-radius: 50%;
+}
+
+.scrollRight {
+  right: 0;
 }

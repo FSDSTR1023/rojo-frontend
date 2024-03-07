@@ -1,0 +1,9 @@
+.field {
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+
+.fieldTitle {
+  font-weight: 700;
+}

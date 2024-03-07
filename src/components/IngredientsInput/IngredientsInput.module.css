@@ -1,0 +1,51 @@
+.field {
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fieldTitle {
+  font-weight: 700;
+}
+
+.field input {
+  background: none;
+  border: none;
+}
+
+.field input:hover {
+  border: none;
+}
+
+.ingredientContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.ingredient {
+  background-color: rgba(0, 0, 0, 0.1);
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  border-radius: 0.5rem;
+}
+
+.ingredient input {
+  padding: 0.5rem;
+}
+
+.ingredient button {
+  height: 100%;
+  padding: 0.4rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.ingredient button:hover {
+  background-color: rgba(200, 89, 89, 0.72);
+}
