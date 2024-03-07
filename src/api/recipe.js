@@ -26,7 +26,7 @@ export const createRecipe = (recipe) => axios.post('/recipe', recipe)
 
 //PUT
 
-export const updateRecipe = (recipe) => axios.put(`/recipe/${recipe.id}`, recipe)
+export const updateRecipe = (recipe) => axios.put(`/recipe/edit/${recipe.id}`, recipe)
 
 //PATCH
 

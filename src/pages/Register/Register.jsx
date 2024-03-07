@@ -15,9 +15,17 @@ const Register = () => {
   const navigate = useNavigate()
   const { isAuthenticated, login } = useProfile()
 
+  const minLengthError = (value) => {
+    return value.length >= 3 || 'Too short, this field must be at least 3 characters'
+  }
+
+  const maxLengthError = (value) => {
+    return value.length <= 140 || 'Too loong, this field must have a maximum of a 140 characters'
+  }
+
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const { name, lastName, email, password, country, description, userName } = data
+      const { name, lastName, email, password, country, description, userName, imageUrl } = data
       await registerRequest({
         name,
         lastName,
@@ -26,13 +34,10 @@ const Register = () => {
         country,
         description,
         userName,
+        imageUrl,
       })
       login({ email, password })
     } catch (error) {
-      // setError('register', {
-      //   type: 'register',
-      //   message: `The user cannot register: ${error}`,
-      // })
       console.log(error)
     }
   })
@@ -44,154 +49,136 @@ const Register = () => {
   }, [isAuthenticated])
 
   return (
-    <>
-      <div className={styles.page}>
+    <div className={styles.page}>
+      <div className={styles.imgContainer}></div>
+      <div className={styles.registerContainer}>
         <h2 className={styles.title}>Register your account</h2>
         <form className={styles.form} onSubmit={onSubmit}>
           <div className={styles.field}>
             <label className={styles.label} htmlFor="name">
               Name
             </label>
-            <div>
-              <input
-                {...register('name', { required: true })}
-                className={styles.input}
-                id="name"
-                name="name"
-                type="text"
-                required
-              />
-            </div>
-            {errors.name && <span className={styles.error}>This field is required</span>}
+            <input
+              {...register('name', { required: 'This field is required', validate: minLengthError })}
+              className={styles.input}
+              id="name"
+              name="name"
+              type="text"
+              required
+            />
           </div>
+          {errors.name && <span className={styles.error}>{errors.name.message}</span>}
           <div className={styles.field}>
             <label className={styles.label} htmlFor="lastName">
               Last Name
             </label>
-            <div>
-              <input
-                {...register('lastName', { required: true })}
-                className={styles.input}
-                id="lastName"
-                name="lastName"
-                type="text"
-                required
-              />
-            </div>
-            {errors.lastName && <span className={styles.error}>This field is required</span>}
+            <input
+              {...register('lastName', { required: 'This field is required', validate: minLengthError })}
+              className={styles.input}
+              id="lastName"
+              name="lastName"
+              type="text"
+              required
+            />
           </div>
+          {errors.lastName && <span className={styles.error}>{errors.lastName.message}</span>}
           <div className={styles.field}>
             <label className={styles.label} htmlFor="email">
               Email Adress
             </label>
-            <div>
-              <input
-                {...register('email', { required: true })}
-                className={styles.input}
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-              />
-            </div>
-            {errors.email && <span className={styles.error}>This field is required</span>}
+            <input
+              {...register('email', { required: 'This field is required' })}
+              className={styles.input}
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+            />
           </div>
+          {errors.email && <span className={styles.error}>{errors.email.message}</span>}
           <div className={styles.field}>
             <label className={styles.label} htmlFor="password">
               Password
             </label>
-            <div>
-              <input
-                {...register('password', { required: true })}
-                className={styles.input}
-                id="password"
-                name="password"
-                type="password"
-                required
-              />
-            </div>
-            {errors.password && <span className={styles.error}>This field is required</span>}
+            <input
+              {...register('password', { required: 'This field is required', validate: minLengthError })}
+              className={styles.input}
+              id="password"
+              name="password"
+              type="password"
+              required
+            />
           </div>
+          {errors.password && <span className={styles.error}>{errors.password.message}</span>}
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="password">
+            <label className={styles.label} htmlFor="confirmPassword">
               Confirm Password
             </label>
-            <div>
-              <input
-                {...register('confirmPassword', {
-                  required: true,
-                  validate: (value) => {
-                    value === getValues('password') || 'The passwords do not match'
-                  },
-                })}
-                className={styles.input}
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                required
-              />
-            </div>
-            {errors.confirmPassword && <span className={styles.error}>This field is required</span>}
+            <input
+              {...register('confirmPassword', {
+                required: 'This field is required',
+                validate: (value) => value === getValues('password') || 'The passwords do not match',
+              })}
+              className={styles.input}
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              required
+            />
           </div>
+          {errors.confirmPassword && <span className={styles.error}>{errors.confirmPassword.message}</span>}
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="email">
+            <label className={styles.label} htmlFor="country">
               Country
             </label>
-            <div>
-              <input
-                {...register('country', { required: true })}
-                className={styles.input}
-                id="country"
-                name="country"
-                type="text"
-                required
-              />
-            </div>
-            {errors.country && <span className={styles.error}>This field is required</span>}
+            <input
+              {...register('country', { required: 'This field is required', validate: minLengthError })}
+              className={styles.input}
+              id="country"
+              name="country"
+              type="text"
+              required
+            />
           </div>
+          {errors.country && <span className={styles.error}>{errors.country.message}</span>}
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="email">
+            <label className={styles.label} htmlFor="description">
               Description
             </label>
-            <div>
-              <input
-                {...register('description', { required: true })}
-                className={styles.input}
-                id="description"
-                name="description"
-                type="text"
-              />
-            </div>
+            <input
+              {...register('description', { validate: maxLengthError })}
+              className={styles.input}
+              id="description"
+              name="description"
+              type="text"
+            />
           </div>
+          {errors.description && <span className={styles.error}>{errors.description.message}</span>}
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="email">
+            <label className={styles.label} htmlFor="userName">
               User Name
             </label>
-            <div>
-              <input
-                {...register('userName', { required: true })}
-                className={styles.input}
-                id="userName"
-                name="userName"
-                type="userName"
-                required
-              />
-            </div>
-            {errors.userName && <span className={styles.error}>This field is required</span>}
+            <input
+              {...register('userName', { required: 'This field is required', validate: minLengthError })}
+              className={styles.input}
+              id="userName"
+              name="userName"
+              type="text"
+              required
+            />
           </div>
+          {errors.userName && <span className={styles.error}>{errors.userName.message}</span>}
           {errors.register && <span className={styles.error}>{errors.register.message}</span>}
           <button className={styles.button} type="submit">
             Sign Up
           </button>
-          <div className={styles.field}>
-            <p>
-              If you are registered go to <Link to="/login">Login</Link>
-            </p>
-          </div>
+          <p>
+            If you are registered go to <Link to="/login">Login</Link>
+          </p>
         </form>
       </div>
-    </>
+    </div>
   )
 }
 

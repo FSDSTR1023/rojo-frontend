@@ -82,22 +82,16 @@ export default function CreateRecipe() {
         <div className={styles.field}>
           <IngredientsInput {...{ formData, setFormData }} />
         </div>
-        <div className={styles.field}>
-          <RecipeStepsInput {...{ formData, setFormData }} />
-        </div>
-        <div className={styles.field}>
-          <CategoriesInput {...{ formData, setFormData }} />
-        </div>
+        <RecipeStepsInput {...{ formData, setFormData }} />
+        <CategoriesInput {...{ formData, setFormData }} />
         <div className={styles.field}>
           <label htmlFor="difficulty">Difficulty</label>
           <Select options={difficulty} name="difficulty" onChange={handleChangeSelect} />
         </div>
-
         <div className={styles.field}>
           <label htmlFor="time">Preparation time</label>
           <Select options={preparationTime} name="preparationTime" onChange={handleChangeSelect} />
         </div>
-
         <div className={styles.field}>
           <ImageInput handleChange={handleChange} />
         </div>

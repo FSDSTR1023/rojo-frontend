@@ -1,5 +1,5 @@
 import styles from './Opinion.module.css'
-import Star from '../Star'
+import Star from '../icons/Star'
 
 export default function OpinionDisplay({ text, rating, user }) {
   return (

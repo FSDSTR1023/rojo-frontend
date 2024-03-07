@@ -11,8 +11,13 @@
   background-color: var(--clr-primary);
   padding: 1rem;
   border-radius: 1rem;
+}
+
+.profileCard > * {
   display: grid;
+  justify-content: center;
   gap: 0.5rem;
+  height: 100%;
   width: var(--card-width);
 }
 

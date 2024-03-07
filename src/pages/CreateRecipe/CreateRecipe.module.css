@@ -22,21 +22,8 @@
   gap: 10px;
 }
 
-.fieldCheckbox {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
-  gap: 10px;
-}
-
-.checkbox {
-  width: 20px;
-  height: 20px;
-  padding: 6px;
-  border: 1.5px solid #bbbbbb;
-  border-radius: 6px;
+.field label {
+  font-weight: 700;
 }
 
 .field input {
@@ -46,17 +33,4 @@
 
 .field input:hover {
   border: none;
-}
-.select {
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-  width: 300px;
-}
-
-.select > * {
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-  width: 300px;
 }
