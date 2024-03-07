@@ -8,7 +8,7 @@
   height: 70vh;
   justify-content: center;
   color: white;
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.867), rgba(0, 0, 0, 0.344)), url('receta.webp');
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.867), rgba(0, 0, 0, 0.344)), url('/public/receta.webp');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -137,7 +137,7 @@
   height: 800px;
   justify-content: center;
   color: white;
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.908), rgba(0, 0, 0, 0.556)), url('alimentos.webp');
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.908), rgba(0, 0, 0, 0.556)), url('/public/alimentos.webp');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;

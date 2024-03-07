@@ -2,6 +2,7 @@ import { Link, Outlet } from 'react-router-dom'
 import styles from './Layout.module.css'
 import NavBar from '../NavBar'
 import { useProfile } from '../../context/ProfileContext'
+import Footer from '../Footer/Footer'
 import BackArrow from '../icons/BackArrow'
 import TopArrow from '../icons/TopArrow'
 import Chat from '../Chat/Chat'
@@ -30,6 +31,10 @@ export default function Layout() {
       <Link className={styles.navButtonBack} to={-1}>
         <BackArrow />
       </Link>
+
+     <div>
+        <Footer />
+      </div>
     </>
   )
 }
