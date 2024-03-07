@@ -1,31 +1,57 @@
 .recipeWrapper {
-  width: 250px;
-  height: auto;
+  position: relative;
+  perspective: 3200px;
   margin: 20px;
-  border-radius: 6px;
-  background: #fff;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
-  cursor: default;
   transition: all 400ms ease;
-  display: flex;
-  flex-direction: column;
+  width: 300px;
+  aspect-ratio: 16/9;
   flex-shrink: 0;
-  justify-content: space-between;
+  border-radius: 6px;
 }
 .recipeWrapper:hover {
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
   transform: translateY(-2%);
 }
 
+.recipeTop,
 .recipeContent {
-  padding: 2rem;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
   display: flex;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.recipeTop {
+  align-items: end;
+  position: relative;
+}
+
+.recipeContent {
+  padding: 3rem 2rem 0;
   flex-direction: column;
+
+  transform: rotateY(180deg);
 }
-.title {
-  font-size: large;
-  font-weight: bold;
+
+.recipeWrapper[data-reverse='true'] {
+  .recipeTop {
+    transform: rotateY(180deg);
+  }
+  .recipeContent {
+    transform: rotateY(0);
+  }
 }
+
 .ingredients {
   padding-top: 10px;
   overflow: hidden;
@@ -54,28 +80,30 @@
   border-radius: 6px;
   padding: 5px;
 }
-.buttonPreparation {
-  padding: 1rem 3rem;
-  border: 0;
-  border-radius: 0.5rem;
-  margin: 1rem 0 0;
-  background-color: var(--clr-secondary);
-  transition: all 300ms ease;
-}
-.buttonPreparation:hover {
-  box-shadow: var(--shadow);
-}
-.recipeTop {
-  display: flex;
-  flex-direction: row-reverse;
-  position: relative;
-}
+
 .image {
-  height: 150px;
+  height: 100%;
   width: 100%;
   object-fit: cover;
-  border-radius: 6px 6px 0 0;
+  position: absolute;
 }
+
+.title {
+  font-size: large;
+  font-weight: bold;
+  z-index: 10;
+  text-align: center;
+  text-wrap: pretty;
+  width: 100%;
+  color: white;
+}
+.gradient {
+  position: absolute;
+  background-image: linear-gradient(transparent 60%, black);
+  height: 100%;
+  width: 100%;
+}
+
 .favoriteButton {
   background-color: transparent;
   position: absolute;
@@ -84,8 +112,19 @@
   margin: 1rem;
   width: 40px;
   transition: all 300ms ease;
+  z-index: 10;
 }
 .favoriteButton:hover {
   box-shadow: none;
   filter: drop-shadow(0 0 5px rgb(0, 0, 0, 0.4));
+}
+
+.info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 1rem;
+  z-index: 10;
+  padding: 0.5rem 1rem;
+  text-align: center;
 }
