@@ -46,10 +46,10 @@ const RecipeCard = ({ recipe }) => {
         <Link to={`/recipe/${recipe._id}`}>
           <p className={styles.ingredients}>Ingredients: {formattedIngredients}</p>
           <div className={styles.footer}>
-            <div className={styles.difficulty}>
+            <div data-value={recipe.difficulty}>
               <p>{recipe.difficulty}</p>
             </div>
-            <div className={styles.preparationTime}>
+            <div data-value={recipe.preparationTime}>
               <p>{recipe.preparationTime}</p>
             </div>
           </div>
