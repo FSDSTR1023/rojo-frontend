@@ -10,6 +10,8 @@
 .categoriesCards {
   display: flex;
   overflow-x: hidden;
+  gap: 2rem;
+  padding: 1rem;
 }
 
 .scrollLeft,

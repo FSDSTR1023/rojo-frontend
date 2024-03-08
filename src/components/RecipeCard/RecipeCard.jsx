@@ -29,19 +29,24 @@ const RecipeCard = ({ recipe }) => {
 
   return (
     <div className={styles.recipeWrapper} data-reverse={isReverse}>
-      <button className={styles.info} onClick={() => setIsReverse((prev) => !prev)}>
-        Info
-      </button>
-      <Favorite />
-
-      <Link to={`/recipe/${recipe._id}`}>
-        <div className={styles.recipeTop}>
+      <div className={styles.recipeTop}>
+        <button className={styles.info} onClick={() => setIsReverse((prev) => !prev)}>
+          Info
+        </button>
+        <Favorite />
+        <Link to={`/recipe/${recipe._id}`} className={styles.link}>
           <img className={styles.image} src={recipe.imageUrl} alt="recipe-image" />
           <h3 className={styles.title}>{recipe.title}</h3>
           <div className={styles.gradient} />
-        </div>
+        </Link>
+      </div>
 
-        <div className={styles.recipeContent}>
+      <div className={styles.recipeContent}>
+        <button className={styles.info} onClick={() => setIsReverse((prev) => !prev)}>
+          Info
+        </button>
+        <Favorite />
+        <Link to={`/recipe/${recipe._id}`}>
           <p className={styles.ingredients}>Ingredients: {formattedIngredients}</p>
           <div className={styles.footer}>
             <div className={styles.difficulty}>
@@ -51,8 +56,8 @@ const RecipeCard = ({ recipe }) => {
               <p>{recipe.preparationTime}</p>
             </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </div>
   )
 }
