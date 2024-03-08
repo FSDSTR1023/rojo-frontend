@@ -23,12 +23,15 @@ export default function useSnapScroll(speed = 5) {
     if (animation) clearInterval(animation)
     const cardNode = ref.current.children[0]
 
+    const rowStyle = window.getComputedStyle(ref.current)
+    const rowGap = rowStyle.getPropertyValue('gap')
+
     const cardStyle = window.getComputedStyle(cardNode)
     const cardMargin = cardStyle.getPropertyValue('margin')
     const cardWidth = cardNode.clientWidth
     const maxScroll = ref.current.scrollWidth - ref.current.clientWidth
 
-    const scrollValue = parseInt(cardWidth) + 2 * parseInt(cardMargin)
+    const scrollValue = parseInt(cardWidth) + 2 * parseInt(cardMargin) + parseInt(rowGap)
     scrollSP += (scrollValue * sign) / Math.abs(sign)
     if (scrollSP <= 0) {
       scrollSP = 0
