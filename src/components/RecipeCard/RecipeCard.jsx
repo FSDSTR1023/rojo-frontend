@@ -4,6 +4,7 @@ import styles from './RecipeCard.module.css'
 import { Link } from 'react-router-dom'
 import Heart from '../icons/Heart'
 import Information from '../icons/Information'
+import DeleteIcon from '../icons/DeleteIcon'
 
 const RecipeCard = ({ recipe }) => {
   const formattedIngredients = recipe.ingredients.slice(0, -1).join(', ') + ', ' + recipe.ingredients.slice(-1)[0] + '.'
@@ -40,7 +41,7 @@ const RecipeCard = ({ recipe }) => {
 
       <div className={styles.recipeContent}>
         <div className={styles.info}>
-          <Information onClick={() => setIsReverse((prev) => !prev)} />
+          <DeleteIcon onClick={() => setIsReverse((prev) => !prev)} />
           <Favorite />
         </div>
         <Link to={`/recipe/${recipe._id}`}>
